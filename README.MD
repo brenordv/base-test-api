@@ -1,4 +1,15 @@
-# Bast Test API
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=bugs)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=coverage)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=brenordv_base-test-api&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=brenordv_base-test-api)
+
+# Base Test API
 I created this API as base for any other tests I want to do.
 So this project have some basic functionality. As my tests require, I'll add more complex features.
 
