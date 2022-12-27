@@ -10,15 +10,13 @@ namespace Raccoon.Ninja.Services.Services;
 public class CacheService: ICacheService
 {
     private readonly IMemoryCache _memoryCache;
-    private readonly IEventManager _eventManager;
     private readonly ILogger<CacheService> _logger;
     private readonly IList<object> _keys;
     public CacheService(IMemoryCache memoryCache, IEventManager eventManager, ILogger<CacheService> logger)
     {
         _memoryCache = memoryCache;
-        _eventManager = eventManager;
         _logger = logger;
-        _eventManager.Subscribe(EventType.ProductsChanged, ResetCache);
+        eventManager.Subscribe(EventType.ProductsChanged, ResetCache);
         _keys = new List<object>();
     }
 

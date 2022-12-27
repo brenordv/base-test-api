@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Raccoon.Ninja.Domain.Exceptions;
 
@@ -14,5 +15,8 @@ public class BaseException: Exception
     
     public BaseException(string message, Exception exception): base(message, exception)
     { }
-
+    
+    protected BaseException(SerializationInfo info, StreamingContext context) 
+        : base(info, context)
+    { }
 }

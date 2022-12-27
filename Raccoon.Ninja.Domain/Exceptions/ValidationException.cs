@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Raccoon.Ninja.Domain.Exceptions;
 
@@ -13,5 +14,9 @@ public class ValidationException: BaseException
     { }
     
     public ValidationException(string message, Exception exception): base(message, exception)
+    { }
+    
+    protected ValidationException(SerializationInfo info, StreamingContext context) 
+        : base(info, context)
     { }
 }
