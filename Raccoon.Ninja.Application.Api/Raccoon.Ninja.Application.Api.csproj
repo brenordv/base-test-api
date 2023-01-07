@@ -20,6 +20,9 @@
       <Content Update="appsettings.local.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <Content Include="..\README.MD">
+        <Link>README.MD</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
