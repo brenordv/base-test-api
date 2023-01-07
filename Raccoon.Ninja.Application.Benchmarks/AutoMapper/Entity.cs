@@ -1,5 +1,8 @@
-﻿namespace Raccoon.Ninja.Application.Benchmarks.AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Raccoon.Ninja.Application.Benchmarks.AutoMapper;
+
+[ExcludeFromCodeCoverage]
 public record Entity()
 {
     public Guid Id { get; init; }

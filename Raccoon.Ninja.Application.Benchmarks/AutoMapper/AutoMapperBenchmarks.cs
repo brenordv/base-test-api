@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 using Bogus;
 
 namespace Raccoon.Ninja.Application.Benchmarks.AutoMapper;
 
+[ExcludeFromCodeCoverage]
 [MemoryDiagnoser, RankColumn, MinColumn, MaxColumn, MeanColumn, MedianColumn,UnicodeConsoleLogger, Orderer(SummaryOrderPolicy.FastestToSlowest)]
 public class AutoMapperBenchmarks
 {
