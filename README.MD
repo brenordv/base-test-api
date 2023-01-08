@@ -47,6 +47,34 @@ Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/po
 
 
 # Updates
+## 2023-01-07 - Implicit/Explicit conversion
+In C#, conversion operators are used to convert an object of one type to another. 
+There are two types of conversion operators: explicit and implicit.
+
+Explicit conversion operators are used to perform conversions that may result in data 
+loss or may not be exactly representable. These conversions require a cast operator in 
+order to be performed. For example:
+```csharp
+double d = 12.34;
+var i = (int)d;  // explicit conversion from double to int
+```
+
+Implicit conversion operators are used to perform conversions that will not result in data loss 
+and are exactly representable. These conversions do not require a cast operator and are 
+performed automatically by the compiler. For example:
+```csharp
+int i = 123;
+long l = i;  // implicit conversion from int to long
+
+```
+
+One big difference between explicit and implicit conversion operators is that implicit allows for both
+operations (implicit and explicit) while explicit only allows for explicit operations. This sentence seems kind
+of nonsensical, but it's actually quite simple. If you implement implicit conversion, you can do both examples
+listed above. But if you implement explicit conversion, you can only do the first example. 
+
+This implementation was made in the [Model.cs](https://github.com/brenordv/base-test-api/blob/master/Raccoon.Ninja.Application.Benchmarks/AutoMapper/Model.cs#L13) class.
+
 ## 2023-01-07 - Benchmarks regarding AutoMapper
 So I read in a couple of articles that AutoMapper is bad for you... kind of. 
 In a nutshell, the two main against AutoMapper were:

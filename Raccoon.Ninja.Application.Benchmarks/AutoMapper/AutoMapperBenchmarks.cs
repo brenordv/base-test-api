@@ -15,7 +15,7 @@ public class AutoMapperBenchmarks
     private IMapper _mapper;
     private Entity[] _entities;
 
-    [Params(1, 5, 10, 100, 1000, 5000)]
+    [Params(1, 10, 100, 1000)]
     public int QuantityEntities { get; set; }
 
     private void CreateMapper()
@@ -78,9 +78,28 @@ public class AutoMapperBenchmarks
     }
     
     [Benchmark]
+    public void Implicit_SingleEntityConverted()
+    {
+        foreach (var entity in _entities)
+        {
+            Model model = entity;
+        }
+    }
+    
+    [Benchmark]
     public void Explicit_ListOfEntitiesLINQConverted()
     {
         var models = _entities.Select(x => (Model)x).ToArray();
+    }
+        
+    [Benchmark]
+    public void Implicit_ListOfEntitiesLINQConverted()
+    {
+        var models = _entities.Select(x =>
+        {
+            Model model = x;
+            return model;
+        }).ToArray();
     }
     
     [Benchmark]
