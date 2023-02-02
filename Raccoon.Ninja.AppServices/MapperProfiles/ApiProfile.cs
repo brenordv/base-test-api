@@ -10,6 +10,6 @@ public class ApiProfile: Profile
     {
         CreateMap<Product, AddProductModel>().ReverseMap();
         CreateMap<Product, ProductModel>().ReverseMap();
-        
+        CreateMap<User, UserModel>().ReverseMap();
     }
 }

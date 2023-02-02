@@ -17,9 +17,25 @@ public static class ProductGenerator
         }   
     }
     
-    public static Product Generate(bool includeId = true)
+    public static Product Generate(bool includeId = true, bool resetVersion = false)
     {
-        return includeId ? _fakerFull.Generate() : _fakerNoId.Generate();
+        if (!resetVersion)
+            return includeId ? _fakerFull.Generate() : _fakerNoId.Generate();
+     
+        var baseProduct = _fakerNoId.Generate();
+        var product = new Product
+        {
+            Company = baseProduct.Company,
+            Description = baseProduct.Description,
+            Name = baseProduct.Name,
+            Tier = baseProduct.Tier,
+            CreatedAt = baseProduct.CreatedAt,
+            ModifiedAt = baseProduct.ModifiedAt,
+            SuggestedPrice = baseProduct.SuggestedPrice,
+            Version = 1 // Since version cannot be set back to 1, we need to create a new instance.
+        };
+        
+        return includeId ? product with { Id = Guid.NewGuid() } : product; 
     }
     
     private static Faker<Product> Init(bool includeId)

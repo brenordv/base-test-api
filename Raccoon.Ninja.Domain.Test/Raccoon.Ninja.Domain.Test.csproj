@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Raccoon.Ninja.Domain\Raccoon.Ninja.Domain.csproj" />
+      <ProjectReference Include="..\Raccoon.Ninja.Test.Helpers\Raccoon.Ninja.Test.Helpers.csproj" />
     </ItemGroup>
 
 </Project>

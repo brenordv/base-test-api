@@ -51,10 +51,8 @@ public class ProductRepository : IProductRepository
     {
         var preparedProduct = newProduct with
         {
-            Id = Guid.NewGuid(),
             CreatedAt = DateTime.Now,
-            ModifiedAt = DateTime.Now,
-            Version = 1
+            ModifiedAt = DateTime.Now
         };
         var insertedId = (Guid)_collection.Insert(preparedProduct);
 

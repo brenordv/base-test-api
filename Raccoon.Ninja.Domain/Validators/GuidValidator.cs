@@ -11,10 +11,10 @@ public static class GuidValidator
             : (true, Array.Empty<string>());
     }
 
-    public static void EnsureIsValidForId(this Guid guid)
+    public static void EnsureIsValidForId(this Guid guid, string replacementErrorMessage = null)
     {
         var (passed, errors) = guid.TryIsValidForId();
         if (passed) return;
-        throw new ValidationException($"Guid '{guid}' instance cannot be used as Id. Reasons: {string.Join(", ", errors)}");
+        throw new ValidationException(replacementErrorMessage ?? $"Guid '{guid}' instance cannot be used as Id. Reasons: {string.Join(", ", errors)}");
     }
 }

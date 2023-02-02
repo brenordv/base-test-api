@@ -70,8 +70,8 @@ public class ProductServiceTests
     public void Add_AddsNewProduct()
     {
         // Arrange
-        var newProduct = ProductGenerator.Generate(false) with { Version = 1};
-        var expected = ProductGenerator.Generate(false) with { Version = 1};;
+        var newProduct = ProductGenerator.Generate(false);
+        var expected = newProduct with { Id = Guid.NewGuid() };
         _mockProductRepository.Setup(r => r.Add(It.IsAny<Product>())).Returns(expected);
 
         // Act

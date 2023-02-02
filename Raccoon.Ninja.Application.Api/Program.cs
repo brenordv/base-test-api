@@ -29,7 +29,8 @@ builder.Services.AddOptions<AppSettings>().Bind(builder.Configuration.GetSection
 // Registering API adapter (app service layer) specific stuff.
 builder.Services
     .RegisterMappingProfiles()
-    .AddDecoratedWithStopWatch<IProductsAppService, ProductsAppService>(ServiceLifetime.Scoped);
+    .AddDecoratedWithStopWatch<IProductsAppService, ProductsAppService>(ServiceLifetime.Scoped)
+    .AddScoped<IUserAppService, UsersAppService>();
 
 // Registering the actual Services, Repositories and auxiliary engines.
 builder.Services
@@ -46,30 +47,44 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-const string apiEndpoint = "/api/products";
+const string apiProductsEndpoint = "/api/products";
+const string apiUsersEndpoint = "/api/users";
 
 // API Routes
 app.MapGet("/",
     () => "Hello World!");
 
-app.MapGet(apiEndpoint,
+app.MapGet(apiProductsEndpoint,
     (IProductsAppService productsAppService) => productsAppService.Get());
 
-app.MapGet($"{apiEndpoint}/{{id:Guid}}",
+app.MapGet($"{apiProductsEndpoint}/{{id:Guid}}",
     (IProductsAppService productsAppService, Guid id) => productsAppService.Get(id));
 
-app.MapPost(apiEndpoint,
+app.MapPost(apiProductsEndpoint,
     (IProductsAppService productsAppService, AddProductModel newProd) => productsAppService.Add(newProd));
 
-app.MapPut(apiEndpoint,
+app.MapPut(apiProductsEndpoint,
     (IProductsAppService productsAppService, UpdateProductModel prod) => productsAppService.Update(prod));
 
+
+app.MapGet(apiUsersEndpoint,
+    (IUserAppService usersAppService) => usersAppService.Get());
+
 #if DEBUG
-app.MapGet("/dev/populate-db",
+app.MapGet($"{apiProductsEndpoint}/dev/populate-db",
     (IProductsAppService productsAppService, [FromQuery] int? quantity, [FromQuery] int? archive) =>
     {
         // None of this should be here, but it's just a test.        
         productsAppService.PopulateDevDb(quantity, archive);
+        return "ok";
+    });
+
+
+app.MapGet($"{apiUsersEndpoint}/dev/populate-db",
+    (IUserAppService usersAppService, [FromQuery] int? quantity, [FromQuery] int? archive) =>
+    {
+        // None of this should be here, but it's just a test.        
+        usersAppService.PopulateDevDb(quantity, archive);
         return "ok";
     });
 #endif

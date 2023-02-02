@@ -1,9 +1,9 @@
-﻿using Bogus;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Raccoon.Ninja.Domain.Constants;
 using Raccoon.Ninja.Domain.Entities;
 using Raccoon.Ninja.Domain.Enums;
 using Raccoon.Ninja.Domain.Exceptions;
+using Raccoon.Ninja.Domain.Test.TestHelpers;
 
 namespace Raccoon.Ninja.Domain.Test.Entities;
 
@@ -17,7 +17,10 @@ public class ProductTests
             Id = Guid.Empty
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product Id cannot be empty.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product Id cannot be empty.");
     }
 
     [Theory]
@@ -29,7 +32,10 @@ public class ProductTests
             Name = name
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product Name cannot be null, empty or empty space.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product Name cannot be null, empty or empty space.");
     }
 
     [Theory]
@@ -41,7 +47,9 @@ public class ProductTests
             Name = name
         };
 
-        action.Should().Throw<EntityException>()
+        action
+            .Should()
+            .Throw<ValidationException>()
             .WithMessage($"Product Name cannot exceed {EntityConstants.Products.NameMaxChars} characters.");
     }
 
@@ -66,7 +74,9 @@ public class ProductTests
             Description = description
         };
 
-        action.Should().Throw<EntityException>()
+        action
+            .Should()
+            .Throw<ValidationException>()
             .WithMessage("Product Description cannot be null, empty or empty space.");
     }
 
@@ -79,7 +89,9 @@ public class ProductTests
             Description = description
         };
 
-        action.Should().Throw<EntityException>()
+        action
+            .Should()
+            .Throw<ValidationException>()
             .WithMessage(
                 $"Product Description cannot exceed {EntityConstants.Products.DescriptionMaxChars} characters.");
     }
@@ -104,7 +116,10 @@ public class ProductTests
             SuggestedPrice = -0.00001m
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product SuggestedPrice cannot be lesser than zero.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product SuggestedPrice cannot be lesser than 0.");
     }
 
     [Theory]
@@ -129,7 +144,10 @@ public class ProductTests
             Company = company
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product Company cannot be null, empty or empty space.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product Company cannot be null, empty or empty space.");
     }
 
     [Theory]
@@ -141,7 +159,9 @@ public class ProductTests
             Company = company
         };
 
-        action.Should().Throw<EntityException>()
+        action
+            .Should()
+            .Throw<ValidationException>()
             .WithMessage($"Product Company cannot exceed {EntityConstants.Products.CompanyMaxChars} characters.");
     }
 
@@ -165,7 +185,10 @@ public class ProductTests
             CreatedAt = DateTime.MinValue
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product CreatedAt cannot be equal to minimum date.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product CreatedAt cannot be equal to minimum date.");
     }
 
     [Fact]
@@ -176,7 +199,10 @@ public class ProductTests
             CreatedAt = DateTime.MaxValue
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product CreatedAt cannot be equal to maximum date.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product CreatedAt cannot be equal to maximum date.");
     }
 
     [Fact]
@@ -187,7 +213,10 @@ public class ProductTests
             CreatedAt = DateTime.UtcNow.AddDays(1)
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product CreatedAt cannot be in the future.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product CreatedAt cannot be in the future.");
     }
 
     [Fact]
@@ -212,7 +241,10 @@ public class ProductTests
             ModifiedAt = DateTime.MinValue
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product ModifiedAt cannot be equal to minimum date.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product ModifiedAt cannot be equal to minimum date.");
     }
 
     [Fact]
@@ -223,7 +255,10 @@ public class ProductTests
             ModifiedAt = DateTime.MaxValue
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product ModifiedAt cannot be equal to maximum date.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product ModifiedAt cannot be equal to maximum date.");
     }
 
     [Fact]
@@ -234,7 +269,10 @@ public class ProductTests
             ModifiedAt = DateTime.UtcNow.AddDays(1)
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product ModifiedAt cannot be in the future.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product ModifiedAt cannot be in the future.");
     }
 
     [Fact]
@@ -281,7 +319,10 @@ public class ProductTests
             Version = version
         };
 
-        action.Should().Throw<EntityException>().WithMessage("Product Version cannot be lesser than zero.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product Version cannot be lesser than 1.");
     }
 
     [Fact]
@@ -334,33 +375,27 @@ public class ProductTests
         };
 
         // Assert
-        action.Should().Throw<EntityException>().WithMessage("Product Tier value must be defined.");
+        action
+            .Should()
+            .Throw<ValidationException>()
+            .WithMessage("Product Tier '99999999' is not a valid value for ProductTier.");
     }
 
     #region Test Helpers - Data Generation
 
     public static IEnumerable<object[]> GetInvalidString()
     {
-        yield return new object[] { null };
-        yield return new object[] { string.Empty };
-        yield return new object[] { "       " };
-        yield return new object[] { " " };
-        yield return new object[] { "" };
+        return DataGeneration.GetInvalidString();
     }
 
     public static IEnumerable<object[]> GetValidStringUpToChars(int chars)
     {
-        var faker = new Faker();
-        for (var i = 1; i <= chars; i++)
-        {
-            yield return new object[] { faker.Random.String(i, i) };
-        }
+        return DataGeneration.GetValidStringUpToChars(chars);
     }
 
     public static IEnumerable<object[]> GetValidStringOverChars(int chars)
     {
-        var faker = new Faker();
-        yield return new object[] { faker.Random.String(++chars, chars) };
+        return DataGeneration.GetValidStringOverChars(chars);
     }
 
     #endregion

@@ -107,6 +107,19 @@ Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/po
 
 
 # Updates
+## 2023-02-01 - New feature
+
+### Major changes
+
+
+### Minor changes
+- Created User entity, model and all the supporting system around it.
+- Removed EntityException because it didn't bring much to the table.
+- Streamlined the validation process.
+- Added tons of unit tests.
+- Fixed a few bugs.
+
+
 ## 2023-01-21 - Moved Benchmarks
 The benchmarks project was making too much noise in this readme file and the project didn't really belong here.
 So I moved it to a new repository: [csharp-benchmarks](https://github.com/brenordv/csharp-benchmarks)
