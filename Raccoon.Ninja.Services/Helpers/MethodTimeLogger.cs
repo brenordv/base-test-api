@@ -15,7 +15,14 @@ public static class MethodTimeLogger
         //https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics#trackmetric
         
         //Idea: Send custom telemetry data to Azure Application Insights, so we can monitor performance degradation.
-        Logger.LogTrace("MethodTimer: {method} took {elapsed}. Message: {message}",
-            methodBse.Name, elapsed, message);
+        
+        if (Logger != null)
+        {
+            Logger.LogTrace("MethodTimer: {method} took {elapsed}. Message: {message}",
+                methodBse.Name, elapsed, message);
+            return;
+        }
+        
+        Console.WriteLine($"MethodTimer: {methodBse.Name} took {elapsed}. Message: {message}");
     }
 }
