@@ -6,6 +6,7 @@ using Raccoon.Ninja.Domain.Config;
 using Raccoon.Ninja.Domain.Models;
 using Raccoon.Ninja.Infra.DI.Extensions;
 using Raccoon.Ninja.Infra.DI.Helpers;
+using Raccoon.Ninja.Services.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,10 @@ builder.Services
 
 var app = builder.Build();
 
+// Adding MethodTimer to log execution time of methods.
+// Since it's a static class, we need to set the logger instance.
+MethodTimeLogger.Logger = app.Logger;
+
 // Adding swagger when running in dev.
 if (app.Environment.IsDevelopment())
 {
@@ -67,8 +72,8 @@ app.MapPut(apiProductsEndpoint,
     (IProductsAppService productsAppService, UpdateProductModel prod) => productsAppService.Update(prod));
 
 
-app.MapGet(apiUsersEndpoint,
-    (IUserAppService usersAppService) => usersAppService.Get());
+app.MapGet($"{apiUsersEndpoint}/{{limit:int}}",
+    (IUserAppService usersAppService, int? limit) => usersAppService.Get(limit ?? 42));
 
 #if DEBUG
 app.MapGet($"{apiProductsEndpoint}/dev/populate-db",

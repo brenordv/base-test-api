@@ -1,4 +1,5 @@
-﻿using Raccoon.Ninja.Domain.Entities;
+﻿using MethodTimer;
+using Raccoon.Ninja.Domain.Entities;
 using Raccoon.Ninja.Domain.Interfaces.Repositories;
 using Raccoon.Ninja.Domain.Interfaces.Services;
 using Raccoon.Ninja.Test.Helpers.Generators;
@@ -15,9 +16,14 @@ public class UserService: IUserService
         _userRepository = userRepository;
     }
 
-    public IList<User> Get()
+    
+    [Time("Fetching first {limit} users")]
+    public IList<User> Get(int limit = 42)
     {
-       return _userRepository.Get();
+       return _userRepository
+           .Get()
+           .Take(limit)
+           .ToList();
     }
 
     public void PopulateDevDb(int? quantity, int? toDeactivate)

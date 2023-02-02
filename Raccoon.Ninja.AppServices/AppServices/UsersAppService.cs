@@ -17,7 +17,7 @@ public class UsersAppService: IUserAppService
         _mapper = mapper;
     }
 
-    public IList<UserModel> Get()
+    public IList<UserModel> Get(int limit = 42)
     {
         var users = _userService.Get();
         return _mapper.Map<IList<User>, IList<UserModel>>(users);
