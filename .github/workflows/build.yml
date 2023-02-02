@@ -48,7 +48,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"brenordv_base-test-api" /o:"raccoon-ninja" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:"sonar.verbose=true" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.coverage.exclusions=**/*Exception.cs,**/Models/*,**/Enums/*,**/Constants/*,**/Interfaces/*,**/Raccoon.Ninja.Application.Benchmarks/*,**/Raccoon.Ninja.Application.Benchmarks/*/*
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"brenordv_base-test-api" /o:"raccoon-ninja" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:"sonar.verbose=true" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.coverage.exclusions=**/*Exception.cs,**/Models/*,**/Enums/*,**/Constants/*,**/Interfaces/*,**/Repositories/*,**/MapperProfiles/ApiProfile.cs, **/MethodTimeLogger.cs,**/Raccoon.Ninja.Infra.DI/*
           dotnet build --configuration Release
           dotnet-coverage collect 'dotnet test' -f xml -o 'coverage.xml'          
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
