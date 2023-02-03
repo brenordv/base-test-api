@@ -20,6 +20,8 @@ So this project have some basic functionality. As my tests require, I'll add mor
 3. (A variant of the) Observer pattern to allow bust the cache whenever a product is modified;
 4. Decorator on top of the controller to measure the elapsed time of each endpoint;
 5. Swagger.
+6. SonarCloud integration.
+7. Another "decorator" to log method. The advantage of MethodTimer.Fody is that we don't need to add a lot of code to make it work. 
 
 ## Considerations
 ### Self-validated entities.
@@ -80,6 +82,9 @@ In summary, The decorator pattern is a way of adding new behavior to an existing
 it allows you to add or remove behavior at runtime, it promotes flexibility, extensibility, reusability and the Open/Closed Principle (OCP) 
 and Single Responsibility Principle (SRP) and it is an alternative to subclassing.
 
+One real benefit we could consider for this approach (using the third party package or the one I've created) is that we can do things like collect custom telemetry and
+monitor the performance degradation of the endpoints.
+
 
 ## What's next?
 
@@ -107,6 +112,20 @@ Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/po
 
 
 # Updates
+## 2023-02-01 - New feature
+
+### Major changes
+- Added a new "decorator" using the package `MethodTimer.Fody` to measure the elapsed time of each endpoint.
+
+
+### Minor changes
+- Created User entity, model and all the supporting system around it.
+- Removed EntityException because it didn't bring much to the table.
+- Streamlined the validation process.
+- Added tons of unit tests.
+- Fixed a few bugs.
+
+
 ## 2023-01-21 - Moved Benchmarks
 The benchmarks project was making too much noise in this readme file and the project didn't really belong here.
 So I moved it to a new repository: [csharp-benchmarks](https://github.com/brenordv/csharp-benchmarks)

@@ -1,6 +1,6 @@
 ﻿using Raccoon.Ninja.Domain.Constants;
 using Raccoon.Ninja.Domain.Enums;
-using Raccoon.Ninja.Domain.Exceptions;
+using Raccoon.Ninja.Domain.Validators;
 
 namespace Raccoon.Ninja.Domain.Entities;
 
@@ -21,11 +21,15 @@ public record Product
         SuggestedPrice = newValues.TryGetValue(nameof(SuggestedPrice), out var suggestedPrice)
             ? decimal.Parse(suggestedPrice.ToString())
             : old.SuggestedPrice;
-        
+
         Tier = newValues.TryGetValue(nameof(Tier), out var tier) ? (ProductTier)tier : old.Tier;
         CreatedAt = newValues.TryGetValue(nameof(CreatedAt), out var createdAt) ? (DateTime)createdAt : old.CreatedAt;
-        ModifiedAt = newValues.TryGetValue(nameof(ModifiedAt), out var modifiedAt) ? (DateTime)modifiedAt : old.ModifiedAt;
-        ArchivedAt = newValues.TryGetValue(nameof(ArchivedAt), out var archivedAt) ? (DateTime)archivedAt : old.ArchivedAt;
+        ModifiedAt = newValues.TryGetValue(nameof(ModifiedAt), out var modifiedAt)
+            ? (DateTime)modifiedAt
+            : old.ModifiedAt;
+        ArchivedAt = newValues.TryGetValue(nameof(ArchivedAt), out var archivedAt)
+            ? (DateTime)archivedAt
+            : old.ArchivedAt;
         Version = old.Version + 1;
     }
 
@@ -36,9 +40,7 @@ public record Product
         get => _id;
         init
         {
-            if (value == Guid.Empty)
-                throw new EntityException($"{nameof(Product)} {nameof(Id)} cannot be empty.");
-
+            value.EnsureIsValidForId($"{nameof(Product)} {nameof(Id)} cannot be empty.");
             _id = value;
         }
     }
@@ -50,12 +52,7 @@ public record Product
         get => _name;
         init
         {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new EntityException($"{nameof(Product)} {nameof(Name)} cannot be null, empty or empty space.");
-
-            if (value.Length > EntityConstants.Products.NameMaxChars)
-                throw new EntityException(
-                    $"{nameof(Product)} {nameof(Name)} cannot exceed {EntityConstants.Products.NameMaxChars} characters.");
+            value.IsTextUpToChars(EntityConstants.Products.NameMaxChars, $"{nameof(Product)} {nameof(Name)}");
 
             _name = value;
         }
@@ -68,13 +65,8 @@ public record Product
         get => _description;
         init
         {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new EntityException(
-                    $"{nameof(Product)} {nameof(Description)} cannot be null, empty or empty space.");
-
-            if (value.Length > EntityConstants.Products.DescriptionMaxChars)
-                throw new EntityException(
-                    $"{nameof(Product)} {nameof(Description)} cannot exceed {EntityConstants.Products.DescriptionMaxChars} characters.");
+            value.IsTextUpToChars(EntityConstants.Products.DescriptionMaxChars,
+                $"{nameof(Product)} {nameof(Description)}");
 
             _description = value;
         }
@@ -87,9 +79,7 @@ public record Product
         get => _suggestedPrice;
         init
         {
-            if (value < 0)
-                throw new EntityException($"{nameof(Product)} {nameof(SuggestedPrice)} cannot be lesser than zero.");
-
+            value.IsGreaterThanOrEqualTo(0, $"{nameof(Product)} {nameof(SuggestedPrice)}");
             _suggestedPrice = value;
         }
     }
@@ -101,9 +91,7 @@ public record Product
         get => _tier;
         init
         {
-            if (!Enum.IsDefined(value))
-                throw new EntityException($"{nameof(Product)} {nameof(Tier)} value must be defined.");
-
+            value.IsValidEnum($"{nameof(Product)} {nameof(Tier)}");
             _tier = value;
         }
     }
@@ -115,12 +103,8 @@ public record Product
         get => _company;
         init
         {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new EntityException($"{nameof(Product)} {nameof(Company)} cannot be null, empty or empty space.");
-
-            if (value.Length > EntityConstants.Products.CompanyMaxChars)
-                throw new EntityException(
-                    $"{nameof(Product)} {nameof(Company)} cannot exceed {EntityConstants.Products.CompanyMaxChars} characters.");
+            value.IsTextUpToChars(EntityConstants.Products.CompanyMaxChars, 
+                $"{nameof(Product)} {nameof(Company)}");
 
             _company = value;
         }
@@ -133,15 +117,7 @@ public record Product
         get => _createdAt;
         init
         {
-            if (value == DateTime.MinValue)
-                throw new EntityException($"{nameof(Product)} {nameof(CreatedAt)} cannot be equal to minimum date.");
-
-            if (value == DateTime.MaxValue)
-                throw new EntityException($"{nameof(Product)} {nameof(CreatedAt)} cannot be equal to maximum date.");
-
-            if (value.ToUniversalTime() > DateTime.UtcNow)
-                throw new EntityException($"{nameof(Product)} {nameof(CreatedAt)} cannot be in the future.");
-
+            value.IsInThePast($"{nameof(Product)} {nameof(CreatedAt)}");
             _createdAt = value;
         }
     }
@@ -153,15 +129,7 @@ public record Product
         get => _modifiedAt;
         init
         {
-            if (value == DateTime.MinValue)
-                throw new EntityException($"{nameof(Product)} {nameof(ModifiedAt)} cannot be equal to minimum date.");
-
-            if (value == DateTime.MaxValue)
-                throw new EntityException($"{nameof(Product)} {nameof(ModifiedAt)} cannot be equal to maximum date.");
-
-            if (value.ToUniversalTime() > DateTime.UtcNow)
-                throw new EntityException($"{nameof(Product)} {nameof(ModifiedAt)} cannot be in the future.");
-
+            value.IsInThePast($"{nameof(Product)} {nameof(ModifiedAt)}");
             _modifiedAt = value;
         }
     }
@@ -173,9 +141,7 @@ public record Product
         get => _version;
         init
         {
-            if (value <= 0)
-                throw new EntityException($"{nameof(Product)} {nameof(Version)} cannot be lesser than zero.");
-
+            value.IsGreaterThanOrEqualTo(_version, $"{nameof(Product)} {nameof(Version)}");
             _version = value;
         }
     }
@@ -183,7 +149,7 @@ public record Product
     public DateTime? ArchivedAt { get; private set; }
 
     public bool IsArchived => ArchivedAt.HasValue;
-    
+
     public void ArchiveProduct()
     {
         ArchivedAt = DateTime.Now;

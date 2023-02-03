@@ -21,12 +21,14 @@ public static class ServiceRegistrationHelper
     {
         services.AddSingleton<ICacheService, CacheService>();
         services.AddScoped<IProductsService, ProductsService>();
+        services.AddScoped<IUserService, UserService>();
         return services;
     }
     
     public static IServiceCollection RegisterRepositories(this IServiceCollection services)
     {
         services.AddDecoratedWithMemCache<IProductRepository, ProductRepository>(ServiceLifetime.Singleton);
+        services.AddScoped<IUserRepository, UserRepository>();
         return services;
     }
 }
