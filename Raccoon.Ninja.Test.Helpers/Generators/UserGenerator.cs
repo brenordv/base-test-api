@@ -17,7 +17,7 @@ public static class UserGenerator
         }   
     }
     
-    private static User Generate(bool includeId = true, bool resetVersion = false)
+    private static User Generate(bool includeId = true)
     {
         return includeId ? _fakerFull.Generate() : _fakerNoId.Generate();
     }
