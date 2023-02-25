@@ -14,14 +14,14 @@ public static class ProductGenerator
         for (var i = 0; i < qty; i++)
         {
             yield return Generate(withId);
-        }   
+        }
     }
-    
+
     public static Product Generate(bool includeId = true, bool resetVersion = false)
     {
         if (!resetVersion)
             return includeId ? _fakerFull.Generate() : _fakerNoId.Generate();
-     
+
         var baseProduct = _fakerNoId.Generate();
         var product = new Product
         {
@@ -34,10 +34,10 @@ public static class ProductGenerator
             SuggestedPrice = baseProduct.SuggestedPrice,
             Version = 1 // Since version cannot be set back to 1, we need to create a new instance.
         };
-        
-        return includeId ? product with { Id = Guid.NewGuid() } : product; 
+
+        return includeId ? product with { Id = Guid.NewGuid() } : product;
     }
-    
+
     private static Faker<Product> Init(bool includeId)
     {
         var faker = new Faker<Product>()
@@ -54,5 +54,5 @@ public static class ProductGenerator
             faker.RuleFor(p => p.Id, f => Guid.NewGuid());
 
         return faker;
-    } 
+    }
 }

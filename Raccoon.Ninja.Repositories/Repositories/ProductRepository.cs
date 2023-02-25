@@ -69,7 +69,6 @@ public class ProductRepository : IProductRepository
     {
         var preparedProduct = product with
         {
-            CreatedAt = DateTime.Now,
             ModifiedAt = DateTime.Now,
             Version = product.Version + 1
         };

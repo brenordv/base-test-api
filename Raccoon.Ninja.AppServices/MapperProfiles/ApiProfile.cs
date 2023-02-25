@@ -8,7 +8,6 @@ public class ApiProfile: Profile
 {
     public ApiProfile()
     {
-        CreateMap<Product, AddProductModel>().ReverseMap();
         CreateMap<Product, ProductModel>().ReverseMap();
         CreateMap<User, UserModel>().ReverseMap();
     }

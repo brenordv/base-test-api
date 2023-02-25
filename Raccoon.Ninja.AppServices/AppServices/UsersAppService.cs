@@ -19,7 +19,7 @@ public class UsersAppService: IUserAppService
 
     public IList<UserModel> Get(int limit = 42)
     {
-        var users = _userService.Get();
+        var users = _userService.Get(limit);
         return _mapper.Map<IList<User>, IList<UserModel>>(users);
     }
 

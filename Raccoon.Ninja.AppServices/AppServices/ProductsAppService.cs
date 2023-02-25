@@ -32,9 +32,7 @@ public class ProductsAppService : IProductsAppService
 
     public ProductModel Add(AddProductModel newProductRequest)
     {
-        var addedProduct = _productsService
-            .Add(_mapper.Map<AddProductModel, Product>(newProductRequest));
-
+        var addedProduct = _productsService.Add(newProductRequest);
         return _mapper.Map<Product, ProductModel>(addedProduct);
     }
 

@@ -91,6 +91,7 @@ monitor the performance degradation of the endpoints.
 1. Secure the endpoints
 2. Endpoint validation attributes (to reject invalid requests as soon as possible).
 3. Exception interceptor (to prevent exceptions from leaking into the response).
+4. Create implementation using the "old way". Later I want to create a comparison between the two approaches.
 
 ## Storage
 For storage, I'm using LiteDB because I wanted to try a new (to me) embedded NoSql.
@@ -108,15 +109,27 @@ Example:
 > Note: You can also create an `appsettings.local.json` file and add this settings there.
 
 ## To populate a local Database
-Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/populate-db`
+~~Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/populate-db`~~
+Since this is a test API, I've kept the populate-db (`/dev/populate-db`) endpoints even in RELEASE mode.
 
 
 # Updates
+## 2023-02-25 - Huge update
+### Major changes
+- Refactored Program.cs to make it cleaner and more readable. Now the endpoints live in their own files.
+- Added tons of unit tests to the project. Including for the endpoints.
+- Included E2E tests using the package `Microsoft.AspNetCore.Mvc.Testing`.
+- Created some example requests to use with JetBrains Rider's REST client.
+- Lots and lots of bug fixes and small adjustments to make things work better.
+
+### Minor changes
+- Updated nuget packages.
+- 
+
 ## 2023-02-01 - New feature
 
 ### Major changes
 - Added a new "decorator" using the package `MethodTimer.Fody` to measure the elapsed time of each endpoint.
-
 
 ### Minor changes
 - Created User entity, model and all the supporting system around it.

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+using Raccoon.Ninja.Application.MinimalApi.Endpoints;
 using Raccoon.Ninja.AppServices.AppServices;
 using Raccoon.Ninja.AppServices.Helpers;
 using Raccoon.Ninja.AppServices.Interfaces;
@@ -8,14 +8,19 @@ using Raccoon.Ninja.Infra.DI.Extensions;
 using Raccoon.Ninja.Infra.DI.Helpers;
 using Raccoon.Ninja.Services.Helpers;
 
+// Creating the app builder.
 var builder = WebApplication.CreateBuilder(args);
 
-// Basic API stuff.
+// Basic API configuration.
 builder.Services
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen()
     .AddMemoryCache()
     .AddLogging();
+
+// Adding swagger when running in dev only.
+#if DEBUG
+builder.Services.AddSwaggerGen();
+#endif
 
 // Adding AppSettings data to environment variables
 builder.Configuration
@@ -39,60 +44,62 @@ builder.Services
     .RegisterServices()
     .RegisterAuxiliary();
 
+// Building the app.
 var app = builder.Build();
 
 // Adding MethodTimer to log execution time of methods.
 // Since it's a static class, we need to set the logger instance.
 MethodTimeLogger.Logger = app.Logger;
 
-// Adding swagger when running in dev.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Adding swagger when running in dev only.
+#if DEBUG
+app.UseSwagger();
+app.UseSwaggerUI();
+#endif
 
+// Just to organize things a little, we'll define the API endpoint prefixes here.
 const string apiProductsEndpoint = "/api/products";
 const string apiUsersEndpoint = "/api/users";
 
 // API Routes
-app.MapGet("/",
-    () => "Hello World!");
+app.MapGet(apiProductsEndpoint, ProductEndpoints.GetProducts)
+    .Produces<IList<ProductModel>>()
+    .Produces(StatusCodes.Status204NoContent);
 
-app.MapGet(apiProductsEndpoint,
-    (IProductsAppService productsAppService) => productsAppService.Get());
+app.MapGet($"{apiProductsEndpoint}/{{id:Guid}}", ProductEndpoints.GetProductById)
+    .Produces<ProductModel>()
+    .Produces(StatusCodes.Status404NotFound);
 
-app.MapGet($"{apiProductsEndpoint}/{{id:Guid}}",
-    (IProductsAppService productsAppService, Guid id) => productsAppService.Get(id));
+app.MapPost(apiProductsEndpoint, ProductEndpoints.CreateProduct)
+    .Produces<ProductModel>(StatusCodes.Status201Created)
+    .Produces(StatusCodes.Status400BadRequest);
 
-app.MapPost(apiProductsEndpoint,
-    (IProductsAppService productsAppService, AddProductModel newProd) => productsAppService.Add(newProd));
+app.MapPut(apiProductsEndpoint, ProductEndpoints.UpdateProduct)
+    .Produces<ProductModel>()
+    .Produces(StatusCodes.Status404NotFound);
 
-app.MapPut(apiProductsEndpoint,
-    (IProductsAppService productsAppService, UpdateProductModel prod) => productsAppService.Update(prod));
+app.MapGet($"{apiProductsEndpoint}/dev/populate-db", DevEndpoints.PopulateProducts);
 
+app.MapGet(apiUsersEndpoint, UserEndpoints.GetUsers)
+    .Produces<IList<UserModel>>()
+    .Produces(StatusCodes.Status204NoContent);
 
-app.MapGet($"{apiUsersEndpoint}/{{limit:int}}",
-    (IUserAppService usersAppService, int? limit) => usersAppService.Get(limit ?? 42));
+app.MapGet($"{apiUsersEndpoint}/dev/populate-db", DevEndpoints.PopulateUsers);
 
-#if DEBUG
-app.MapGet($"{apiProductsEndpoint}/dev/populate-db",
-    (IProductsAppService productsAppService, [FromQuery] int? quantity, [FromQuery] int? archive) =>
-    {
-        // None of this should be here, but it's just a test.        
-        productsAppService.PopulateDevDb(quantity, archive);
-        return "ok";
-    });
-
-
-app.MapGet($"{apiUsersEndpoint}/dev/populate-db",
-    (IUserAppService usersAppService, [FromQuery] int? quantity, [FromQuery] int? archive) =>
-    {
-        // None of this should be here, but it's just a test.        
-        usersAppService.PopulateDevDb(quantity, archive);
-        return "ok";
-    });
-#endif
 
 // Running API
 app.Run();
+
+// Added so we can run the app from the test project. 
+// Going to ignore warnings for this class, since it has nothing to do with the actual app.
+
+
+// ReSharper disable once ClassNeverInstantiated.Global
+#pragma warning disable CA1050
+public partial class Program
+#pragma warning restore CA1050
+{
+    protected Program() { }
+    
+}
+

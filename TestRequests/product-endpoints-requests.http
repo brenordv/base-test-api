@@ -1,0 +1,13 @@
+﻿### Adds new Product
+POST https://localhost:7105/api/products
+Content-Type: application/json
+
+{ 
+  "name": "Product 1", 
+  "description": "Product 1 description", 
+  "suggestedPrice": 12.99,
+  "tier": 30,
+  "company": "A company"
+}
+
+###
