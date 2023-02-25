@@ -1,5 +1,6 @@
 ﻿using Raccoon.Ninja.Domain.Constants;
 using Raccoon.Ninja.Domain.Enums;
+using Raccoon.Ninja.Domain.Extensions;
 using Raccoon.Ninja.Domain.Validators;
 
 namespace Raccoon.Ninja.Domain.Entities;
@@ -12,25 +13,24 @@ public record Product
 
     public Product(Product old, IDictionary<string, object> newValues)
     {
+        // Properties not allowed to be updated by the user.
         Id = old.Id;
+        CreatedAt = old.CreatedAt;
+        
+        // Dynamic properties. (Can be updated by the user)
         Name = newValues.TryGetValue(nameof(Name), out var name) ? name.ToString() : old.Name;
         Company = newValues.TryGetValue(nameof(Company), out var company) ? company.ToString() : old.Company;
         Description = newValues.TryGetValue(nameof(Description), out var description)
             ? description.ToString()
             : old.Description;
-        SuggestedPrice = newValues.TryGetValue(nameof(SuggestedPrice), out var suggestedPrice)
-            ? decimal.Parse(suggestedPrice.ToString())
-            : old.SuggestedPrice;
+
+        if (newValues.TryGetValue(nameof(SuggestedPrice), out var suggestedPrice))
+            SuggestedPrice = suggestedPrice.TryParseDecimal(old.SuggestedPrice);
 
         Tier = newValues.TryGetValue(nameof(Tier), out var tier) ? (ProductTier)tier : old.Tier;
-        CreatedAt = newValues.TryGetValue(nameof(CreatedAt), out var createdAt) ? (DateTime)createdAt : old.CreatedAt;
-        ModifiedAt = newValues.TryGetValue(nameof(ModifiedAt), out var modifiedAt)
-            ? (DateTime)modifiedAt
-            : old.ModifiedAt;
         ArchivedAt = newValues.TryGetValue(nameof(ArchivedAt), out var archivedAt)
             ? (DateTime)archivedAt
             : old.ArchivedAt;
-        Version = old.Version + 1;
     }
 
     private readonly Guid _id;

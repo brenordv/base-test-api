@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
+using Raccoon.Ninja.Domain.Entities;
 using Raccoon.Ninja.Domain.Enums;
 
 namespace Raccoon.Ninja.Domain.Models;
@@ -19,4 +20,21 @@ public class ProductModel
 
     [JsonProperty("archivedAt", NullValueHandling = NullValueHandling.Ignore)]
     public DateTime? ArchivedAt { get; set; }
+
+    public static implicit operator ProductModel(Product product)
+    {
+        return new ProductModel
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            SuggestedPrice = product.SuggestedPrice,
+            Tier = product.Tier,
+            Company = product.Company,
+            CreatedAt = product.CreatedAt,
+            ModifiedAt = product.ModifiedAt,
+            ArchivedAt = product.ArchivedAt
+        };
+    }
+    
 }
