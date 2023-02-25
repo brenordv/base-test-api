@@ -92,7 +92,14 @@ app.Run();
 
 // Added so we can run the app from the test project. 
 // Going to ignore warnings for this class, since it has nothing to do with the actual app.
-#pragma warning disable CA1050
+
+
 // ReSharper disable once ClassNeverInstantiated.Global
-public partial class Program { }
+#pragma warning disable CA1050
+public partial class Program
 #pragma warning restore CA1050
+{
+    protected Program() { }
+    
+}
+

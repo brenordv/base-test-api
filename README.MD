@@ -109,7 +109,8 @@ Example:
 > Note: You can also create an `appsettings.local.json` file and add this settings there.
 
 ## To populate a local Database
-Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/populate-db`
+~~Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/populate-db`~~
+Since this is a test API, I've kept the populate-db (`/dev/populate-db`) endpoints even in RELEASE mode.
 
 
 # Updates
@@ -121,12 +122,14 @@ Run the API in DEBUG and you'll have a special endpoint that does that: `/dev/po
 - Created some example requests to use with JetBrains Rider's REST client.
 - Lots and lots of bug fixes and small adjustments to make things work better.
 
+### Minor changes
+- Updated nuget packages.
+- 
 
 ## 2023-02-01 - New feature
 
 ### Major changes
 - Added a new "decorator" using the package `MethodTimer.Fody` to measure the elapsed time of each endpoint.
-
 
 ### Minor changes
 - Created User entity, model and all the supporting system around it.
