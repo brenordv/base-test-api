@@ -6,7 +6,7 @@ namespace Raccoon.Ninja.Test.Helpers.Generators;
 
 public static class AddProductModelGenerator
 {
-    private static readonly Faker<AddProductModel> _fakerNoId = Init();
+    private static readonly Faker<AddProductModel> FakerNoId = Init();
 
     public static IEnumerable<AddProductModel> Generate(int qty)
     {
@@ -18,7 +18,7 @@ public static class AddProductModelGenerator
 
     public static AddProductModel Generate()
     {
-        var baseProduct = _fakerNoId.Generate();
+        var baseProduct = FakerNoId.Generate();
         var product = new AddProductModel
         {
             Company = baseProduct.Company,

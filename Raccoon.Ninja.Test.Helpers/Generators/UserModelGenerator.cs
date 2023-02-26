@@ -1,15 +1,15 @@
 ﻿using Bogus;
-using Raccoon.Ninja.Domain.Entities;
 using Raccoon.Ninja.Domain.Enums;
+using Raccoon.Ninja.Domain.Models;
 
 namespace Raccoon.Ninja.Test.Helpers.Generators;
 
-public static class UserGenerator
+public static class UserModelGenerator
 {
-    private static readonly Faker<User> FakerFull = Init(true);
-    private static readonly Faker<User> FakerNoId = Init(false);
+    private static readonly Faker<UserModel> FakerFull = Init(true);
+    private static readonly Faker<UserModel> FakerNoId = Init(false);
 
-    public static IEnumerable<User> Generate(int qty, bool withId = true)
+    public static IEnumerable<UserModel> Generate(int qty, bool withId = true)
     {
         for (var i = 0; i < qty; i++)
         {
@@ -17,23 +17,22 @@ public static class UserGenerator
         }
     }
 
-    private static User Generate(bool includeId = true)
+    private static UserModel Generate(bool includeId = true)
     {
         return includeId ? FakerFull.Generate() : FakerNoId.Generate();
     }
 
-    private static Faker<User> Init(bool includeId)
+    private static Faker<UserModel> Init(bool includeId)
     {
-        var faker = new Faker<User>()
+        var faker = new Faker<UserModel>()
             .RuleFor(p => p.FirstName, f => f.Name.FirstName())
             .RuleFor(p => p.LastName, f => f.Name.LastName())
             .RuleFor(p => p.Email, f => f.Internet.Email())
             .RuleFor(p => p.Mobile, f => f.Phone.PhoneNumber())
-            .RuleFor(p => p.Credits, f => f.Random.Decimal())
             .RuleFor(p => p.Role, f => f.Random.Enum<UserType>())
             .RuleFor(p => p.CreatedAt, f => f.Date.Past())
             .RuleFor(p => p.UpdatedAt, f => f.Date.Past())
-            .RuleFor(p => p.Version, f => f.PickRandom(1, 42));
+            .RuleFor(p => p.IsActive, f => f.Random.Bool());
 
         if (includeId)
             faker.RuleFor(p => p.Id, f => Guid.NewGuid());

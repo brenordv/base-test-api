@@ -103,7 +103,7 @@ public class UserTests
 
         user.LastName.Should().NotBeNull();
     }
-    
+
     [Theory]
     [MemberData(nameof(GetInvalidString))]
     public void User_InvalidEmailNullOrEmpty_ShouldThrowException(string email)
@@ -118,7 +118,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage("User Email cannot be null, empty or empty space.");
     }
-    
+
     [Theory]
     [MemberData(nameof(GetValidStringOverChars), EntityConstants.User.EmailMaxChars)]
     public void User_InvalidEmailTooBig_ShouldThrowException(string email)
@@ -133,7 +133,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage($"User Email cannot exceed {EntityConstants.User.EmailMaxChars} characters.");
     }
-    
+
     [Theory]
     [MemberData(nameof(GetValidStringUpToChars), EntityConstants.User.EmailMaxChars)]
     public void User_ValidEmail_Success(string email)
@@ -145,7 +145,7 @@ public class UserTests
 
         user.Email.Should().NotBeNull();
     }
-    
+
     [Theory]
     [MemberData(nameof(GetInvalidString))]
     public void User_InvalidMobileNullOrEmpty_ShouldThrowException(string mobile)
@@ -160,7 +160,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage("User Mobile cannot be null, empty or empty space.");
     }
-    
+
     [Theory]
     [MemberData(nameof(GetValidStringOverChars), EntityConstants.User.MobileMaxChars)]
     public void User_InvalidMobileTooBig_ShouldThrowException(string mobile)
@@ -175,7 +175,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage($"User Mobile cannot exceed {EntityConstants.User.MobileMaxChars} characters.");
     }
-    
+
     [Theory]
     [MemberData(nameof(GetValidStringUpToChars), EntityConstants.User.MobileMaxChars)]
     public void User_ValidMobile_Success(string mobile)
@@ -187,7 +187,7 @@ public class UserTests
 
         user.Mobile.Should().NotBeNull();
     }
-    
+
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
@@ -203,7 +203,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage("User Credits cannot be lesser than 0.");
     }
-    
+
     [Theory]
     [InlineData(1)]
     [InlineData(100)]
@@ -216,13 +216,13 @@ public class UserTests
 
         user.Credits.Should().Be(credits);
     }
-    
+
     [Fact]
     public void Role_InvalidValue_ShouldThrowException()
     {
         var action = () => new User
         {
-            Role = (UserType) 100
+            Role = (UserType)100
         };
 
         action
@@ -230,7 +230,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage("User Role '100' is not a valid value for UserType.");
     }
-    
+
     [Theory]
     [InlineData(UserType.Admin)]
     [InlineData(UserType.Free)]
@@ -243,7 +243,7 @@ public class UserTests
 
         user.Role.Should().Be(role);
     }
-    
+
     [Fact]
     public void CreatedAt_InvalidValueInTheFuture_ShouldThrowException()
     {
@@ -254,7 +254,7 @@ public class UserTests
 
         action.Should().Throw<ValidationException>().WithMessage("User CreatedAt cannot be in the future.");
     }
-    
+
     [Fact]
     public void CreatedAt_InvalidValueMin_ShouldThrowException()
     {
@@ -282,7 +282,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage("User CreatedAt cannot be equal to maximum date.");
     }
-    
+
     [Fact]
     public void CreatedAt_ValidValue_Success()
     {
@@ -295,9 +295,8 @@ public class UserTests
             .Should()
             .BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(500));
     }
-    
-    
-    
+
+
     [Fact]
     public void UpdatedAt_InvalidValue_ShouldThrowException()
     {
@@ -311,7 +310,7 @@ public class UserTests
             .Throw<ValidationException>()
             .WithMessage("User UpdatedAt cannot be in the future.");
     }
-    
+
     [Fact]
     public void UpdatedAt_ValidValue_Success()
     {
@@ -325,7 +324,7 @@ public class UserTests
             .BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(500));
     }
 
-    
+
     #region Test Helpers - Data Generation
 
     public static IEnumerable<object[]> GetInvalidString()

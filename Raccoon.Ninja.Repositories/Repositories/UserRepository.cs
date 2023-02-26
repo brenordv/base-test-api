@@ -12,14 +12,14 @@ public class UserRepository : IUserRepository
 {
     private readonly ILogger<UserRepository> _logger;
     private readonly ILiteCollection<User> _collection;
-    
+
     public UserRepository(ILogger<UserRepository> logger, IOptions<AppSettings> appSettings)
     {
         var database = new LiteDatabase(DbFileHelper.FromFile(appSettings.Value.TestDbFolder));
         _collection = database.GetCollection<User>();
         _logger = logger;
     }
-    
+
     public IList<User> Get()
     {
         var users = _collection
@@ -28,10 +28,10 @@ public class UserRepository : IUserRepository
             .ToList();
 
         _logger.LogTrace("Returning '{UserCount}' from database", users.Count);
-        
+
         return users;
     }
-    
+
     public User Add(User newUser)
     {
         var preparedProduct = newUser with
@@ -39,10 +39,10 @@ public class UserRepository : IUserRepository
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now
         };
-        
+
         var insertedId = (Guid)_collection.Insert(preparedProduct);
 
-        _logger.LogTrace("New user to the database: {FirstName} {LastName} ({Id})", 
+        _logger.LogTrace("New user to the database: {FirstName} {LastName} ({Id})",
             newUser.FirstName,
             newUser.FirstName, insertedId);
 

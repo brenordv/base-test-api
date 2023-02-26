@@ -17,7 +17,7 @@ public static class DbFileHelper
         const string dbFileName = "apiData.dev.db";
         var dbFile = string.IsNullOrWhiteSpace(folder)
             ? $".\\{dbFileName}"
-            : Path.Combine(folder, dbFileName); 
+            : Path.Combine(folder, dbFileName);
         return $"Filename={dbFile};Connection=shared";
     }
 

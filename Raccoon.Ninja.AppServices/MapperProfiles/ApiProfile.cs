@@ -4,7 +4,7 @@ using Raccoon.Ninja.Domain.Models;
 
 namespace Raccoon.Ninja.AppServices.MapperProfiles;
 
-public class ApiProfile: Profile
+public class ApiProfile : Profile
 {
     public ApiProfile()
     {

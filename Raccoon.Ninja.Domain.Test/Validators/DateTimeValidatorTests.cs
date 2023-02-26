@@ -13,7 +13,7 @@ public class DateTimeValidatorTests
         var date = DateTime.UtcNow.AddDays(-1);
 
         // Act
-        var action= () => date.IsInThePast();
+        var action = () => date.IsInThePast();
 
         // Assert
         action.Should().NotThrow<ValidationException>();
@@ -26,7 +26,7 @@ public class DateTimeValidatorTests
         var date = DateTime.UtcNow.AddDays(1);
 
         // Act
-        var action= () => date.IsInThePast();
+        var action = () => date.IsInThePast();
 
         // Assert
         action
@@ -42,7 +42,7 @@ public class DateTimeValidatorTests
         var date = DateTime.MinValue;
 
         // Act
-        var action= () => date.IsInThePast();
+        var action = () => date.IsInThePast();
 
         // Assert
         action

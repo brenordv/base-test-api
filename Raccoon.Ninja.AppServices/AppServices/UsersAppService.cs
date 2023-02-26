@@ -6,7 +6,7 @@ using Raccoon.Ninja.Domain.Models;
 
 namespace Raccoon.Ninja.AppServices.AppServices;
 
-public class UsersAppService: IUserAppService
+public class UsersAppService : IUserAppService
 {
     private readonly IMapper _mapper;
     private readonly IUserService _userService;

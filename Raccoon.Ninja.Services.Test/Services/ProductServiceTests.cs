@@ -13,15 +13,15 @@ namespace Raccoon.Ninja.Services.Test.Services;
 
 public class ProductServiceTests
 {
-    private readonly Mock<IEventManager> _mockEventManager;
-    private readonly Mock<IProductRepository> _mockProductRepository;
-    private readonly IProductsService _service;
+    private readonly Mock<IEventManager> _eventManagerMock;
+    private readonly Mock<IProductRepository> _productRepositoryMock;
+    private readonly IProductsService _sut;
 
     public ProductServiceTests()
     {
-        _mockEventManager = new Mock<IEventManager>();
-        _mockProductRepository = new Mock<IProductRepository>();
-        _service = new ProductsService(_mockEventManager.Object, _mockProductRepository.Object);
+        _eventManagerMock = new Mock<IEventManager>();
+        _productRepositoryMock = new Mock<IProductRepository>();
+        _sut = new ProductsService(_eventManagerMock.Object, _productRepositoryMock.Object);
     }
 
     [Fact]
@@ -29,60 +29,61 @@ public class ProductServiceTests
     {
         // Arrange
         var expected = ProductGenerator.Generate(5).ToList();
-        
-        _mockProductRepository.Setup(r => r.Get()).Returns(expected);
+
+        _productRepositoryMock.Setup(r => r.Get()).Returns(expected);
 
         // Act
-        var result = _service.Get();
+        var result = _sut.Get();
 
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
-    
+
     [Fact]
     public void Get_ValidId_ReturnsProduct()
     {
         // Arrange
         var expected = ProductGenerator.Generate(1).Single();
-        
-        _mockProductRepository.Setup(r => r.Get(expected.Id)).Returns(expected);
+
+        _productRepositoryMock.Setup(r => r.Get(expected.Id)).Returns(expected);
 
         // Act
-        var result = _service.Get(expected.Id);
+        var result = _sut.Get(expected.Id);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
-    
+
     [Fact]
     public void Get_InvalidId_ThrowsException()
     {
-        var action = () => _service.Get(Guid.Empty); 
-        
+        var action = () => _sut.Get(Guid.Empty);
+
         // Act & Assert
         action
             .Should()
             .Throw<ValidationException>()
-            .WithMessage("Guid '00000000-0000-0000-0000-000000000000' instance cannot be used as Id. Reasons: Id cannot be empty.");
+            .WithMessage(
+                "Guid '00000000-0000-0000-0000-000000000000' instance cannot be used as Id. Reasons: Id cannot be empty.");
     }
-    
+
     [Fact]
     public void Add_AddsNewProduct()
     {
         // Arrange
         var newProduct = ProductGenerator.Generate(false, true);
         var expected = newProduct with { Id = Guid.NewGuid() };
-        _mockProductRepository.Setup(r => r.Add(It.IsAny<Product>())).Returns(expected);
+        _productRepositoryMock.Setup(r => r.Add(It.IsAny<Product>())).Returns(expected);
 
         // Act
-        var result = _service.Add(newProduct);
+        var result = _sut.Add(newProduct);
 
         // Assert
         result.Should().Be(expected);
-        _mockProductRepository.Verify(r => r.Add(newProduct), Times.Once());
-        _mockEventManager.Verify(e => e.Notify(EventType.ProductsChanged), Times.Once());
+        _productRepositoryMock.Verify(r => r.Add(newProduct), Times.Once());
+        _eventManagerMock.Verify(e => e.Notify(EventType.ProductsChanged), Times.Once());
     }
-    
+
     [Fact]
     public void Update_UpdatesExistingProduct()
     {
@@ -93,19 +94,19 @@ public class ProductServiceTests
         {
             { "Name", newProdName }
         };
-        
+
         var existingProduct = ProductGenerator.Generate();
-        _mockProductRepository.Setup(r => r.Get(productId)).Returns(existingProduct);
+        _productRepositoryMock.Setup(r => r.Get(productId)).Returns(existingProduct);
         var expected = existingProduct with { Name = newProdName };
-        _mockProductRepository.Setup(r => r.Update(It.IsAny<Product>())).Returns(expected); 
+        _productRepositoryMock.Setup(r => r.Update(It.IsAny<Product>())).Returns(expected);
 
         // Act
-        var result = _service.Update(productId, parsed);
+        var result = _sut.Update(productId, parsed);
 
         // Assert
         result.Should().Be(expected);
-        _mockProductRepository.Verify(r => r.Update(It.Is<Product>(p => p.Name == "Updated Product")), Times.Once());
-        _mockEventManager.Verify(e => e.Notify(EventType.ProductsChanged), Times.Once());
+        _productRepositoryMock.Verify(r => r.Update(It.Is<Product>(p => p.Name == "Updated Product")), Times.Once());
+        _eventManagerMock.Verify(e => e.Notify(EventType.ProductsChanged), Times.Once());
     }
 
     [Fact]
@@ -114,14 +115,94 @@ public class ProductServiceTests
         // Arrange
         var productId = Guid.NewGuid();
         var parsed = new Dictionary<string, object>();
-        _mockProductRepository.Setup(r => r.Get(productId)).Returns((Product)null);
+        _productRepositoryMock.Setup(r => r.Get(productId)).Returns((Product)null);
 
         // Act
-        var result = _service.Update(productId, parsed);
+        var result = _sut.Update(productId, parsed);
 
         // Assert
         result.Should().BeNull();
-        _mockProductRepository.Verify(r => r.Update(It.IsAny<Product>()), Times.Never());
-        _mockEventManager.Verify(e => e.Notify(EventType.ProductsChanged), Times.Never());
+        _productRepositoryMock.Verify(r => r.Update(It.IsAny<Product>()), Times.Never());
+        _eventManagerMock.Verify(e => e.Notify(EventType.ProductsChanged), Times.Never());
+    }
+
+    [Fact]
+    public void PopulateDevDb_WithNullQuantity_ShouldGenerate100Products()
+    {
+        // Arrange
+        const int expectedQuantity = 100;
+        const int expectedToArchive = 10;
+
+        _productRepositoryMock.Setup(repo => repo.Add(It.IsAny<Product>()))
+            .Returns<Product>(p => p);
+
+        // Act
+        _sut.PopulateDevDb(null, expectedToArchive);
+
+        // Assert
+        _productRepositoryMock.Verify(repo => repo.Add(It.IsAny<Product>()), Times.Exactly(expectedQuantity));
+    }
+
+    [Fact]
+    public void PopulateDevDb_WithCustomQuantity_ShouldGenerateCustomNumberOfProducts()
+    {
+        // Arrange
+        const int expectedQuantity = 50;
+        const int expectedToArchive = 10;
+
+        _productRepositoryMock.Setup(repo => repo.Add(It.IsAny<Product>()))
+            .Returns<Product>(p => p);
+
+        // Act
+        _sut.PopulateDevDb(expectedQuantity, expectedToArchive);
+
+        // Assert
+        _productRepositoryMock.Verify(repo => repo.Add(It.IsAny<Product>()), Times.Exactly(expectedQuantity));
+    }
+
+    [Fact]
+    public void PopulateDevDb_WithNullToArchive_ShouldArchive10Products()
+    {
+        // Arrange
+        const int expectedQuantity = 100;
+        const int expectedToArchive = 10;
+
+        var insertedProducts = new List<Product>();
+
+        _productRepositoryMock.Setup(repo => repo.Add(It.IsAny<Product>()))
+            .Returns<Product>(p => p);
+
+        _productRepositoryMock.Setup(repo => repo.Update(It.IsAny<Product>()))
+            .Callback<Product>(p => { insertedProducts.Add(p); });
+
+        // Act
+        _sut.PopulateDevDb(expectedQuantity, null);
+
+        // Assert
+        _productRepositoryMock.Verify(repo => repo.Update(It.IsAny<Product>()), Times.Exactly(expectedToArchive));
+        insertedProducts.Count(p => p.IsArchived).Should().Be(expectedToArchive);
+    }
+
+    [Fact]
+    public void PopulateDevDb_WithCustomToArchive_ShouldArchive5Products()
+    {
+        // Arrange
+        const int expectedQuantity = 100;
+        const int expectedToArchive = 5;
+
+        var insertedProducts = new List<Product>();
+
+        _productRepositoryMock.Setup(repo => repo.Add(It.IsAny<Product>()))
+            .Returns<Product>(p => p);
+
+        _productRepositoryMock.Setup(repo => repo.Update(It.IsAny<Product>()))
+            .Callback<Product>(p => { insertedProducts.Add(p); });
+
+        // Act
+        _sut.PopulateDevDb(expectedQuantity, expectedToArchive);
+
+        // Assert
+        _productRepositoryMock.Verify(repo => repo.Update(It.IsAny<Product>()), Times.Exactly(expectedToArchive));
+        insertedProducts.Count(p => p.IsArchived).Should().Be(expectedToArchive);
     }
 }

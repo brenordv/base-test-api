@@ -99,7 +99,7 @@ app.Run();
 public partial class Program
 #pragma warning restore CA1050
 {
-    protected Program() { }
-    
+    protected Program()
+    {
+    }
 }
-

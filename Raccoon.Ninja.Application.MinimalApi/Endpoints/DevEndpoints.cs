@@ -10,16 +10,16 @@ public static class DevEndpoints
     {
         // None of this should be here, but it's just a test.        
         productsAppService.PopulateDevDb(quantity, archive);
-        
+
         return Results.Ok();
     }
-    
-    public static IResult PopulateUsers(IUserAppService usersAppService, [FromQuery] int? quantity, 
+
+    public static IResult PopulateUsers(IUserAppService usersAppService, [FromQuery] int? quantity,
         [FromQuery] int? archive)
     {
         // None of this should be here, but it's just a test.        
         usersAppService.PopulateDevDb(quantity, archive);
-        
+
         return Results.Ok();
     }
 }

@@ -36,5 +36,4 @@ public class ProductModel
             ArchivedAt = product.ArchivedAt
         };
     }
-    
 }

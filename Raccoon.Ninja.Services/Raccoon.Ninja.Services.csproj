@@ -7,14 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Raccoon.Ninja.Domain\Raccoon.Ninja.Domain.csproj" />
-      <ProjectReference Include="..\Raccoon.Ninja.Test.Helpers\Raccoon.Ninja.Test.Helpers.csproj" />
+        <ProjectReference Include="..\Raccoon.Ninja.Domain\Raccoon.Ninja.Domain.csproj"/>
+        <ProjectReference Include="..\Raccoon.Ninja.Test.Helpers\Raccoon.Ninja.Test.Helpers.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MethodTimer.Fody" Version="3.2.1" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+        <PackageReference Include="MethodTimer.Fody" Version="3.2.1"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0"/>
     </ItemGroup>
 
 </Project>

@@ -11,17 +11,15 @@ public class CacheServiceTests
 {
     private readonly CacheService _cacheService;
     private readonly Mock<IMemoryCache> _mockMemoryCache;
-    private Mock<IEventManager> _mockEventManager;
-    private Mock<ILogger<CacheService>> _mockLogger;
-    
+
     public CacheServiceTests()
     {
+        var eventManagerMock = new Mock<IEventManager>();
+        var loggerMock = new Mock<ILogger<CacheService>>();
         _mockMemoryCache = new Mock<IMemoryCache>();
-        _mockEventManager = new Mock<IEventManager>();
-        _mockLogger = new Mock<ILogger<CacheService>>();
-        _cacheService = new CacheService(_mockMemoryCache.Object, _mockEventManager.Object, _mockLogger.Object);
+        _cacheService = new CacheService(_mockMemoryCache.Object, eventManagerMock.Object, loggerMock.Object);
     }
-    
+
     [Fact]
     public void TryGetValue_ExistingKey_ReturnsTrue()
     {
@@ -36,7 +34,7 @@ public class CacheServiceTests
         // Assert
         result.Should().BeTrue();
     }
-    
+
     [Fact]
     public void TryGetValue_ExistingKey_ReturnsValue()
     {
@@ -44,7 +42,7 @@ public class CacheServiceTests
         const string expectedValue = "value";
         _mockMemoryCache
             .Setup(cache => cache.TryGetValue("key", out It.Ref<object>.IsAny))
-            .Callback((object key, out object v) => { v = expectedValue;})
+            .Callback((object key, out object v) => { v = expectedValue; })
             .Returns(true);
 
         // Act
@@ -53,7 +51,6 @@ public class CacheServiceTests
         // Assert
         result.Should().BeTrue();
         value.Should().Be(expectedValue);
-        
     }
 
     [Fact]
@@ -77,7 +74,7 @@ public class CacheServiceTests
     {
         // Arrange
 
-        
+
         // Act
         var result = _cacheService.TryGetValue(null, out var value);
 

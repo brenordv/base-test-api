@@ -13,7 +13,7 @@ public class NumericValidatorTests
     {
         // Arrange
         const string fieldName = "TestNumber";
-        
+
         // Act & Assert
         // assert that the action does not throw an exception
         var action = () => value.IsGreaterThanOrEqualTo(minValue, fieldName);
@@ -26,7 +26,7 @@ public class NumericValidatorTests
     {
         // Arrange
         const string fieldName = "TestNumber";
-        
+
         // Act & Assert
         // assert that the action throws a ValidationException with the correct error message
         var action = () => value.IsGreaterThanOrEqualTo(minValue, fieldName);

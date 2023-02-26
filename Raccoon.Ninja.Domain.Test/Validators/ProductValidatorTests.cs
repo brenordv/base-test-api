@@ -6,7 +6,6 @@ using Raccoon.Ninja.Test.Helpers.Generators;
 
 namespace Raccoon.Ninja.Domain.Test.Validators;
 
-
 public class ProductValidatorTests
 {
     [Fact]
@@ -33,7 +32,8 @@ public class ProductValidatorTests
         action
             .Should()
             .Throw<EntityActionException>()
-            .WithMessage($"This instance cannot be added. Reasons: This instance of product already has an Id. Should be empty.");
+            .WithMessage(
+                $"This instance cannot be added. Reasons: This instance of product already has an Id. Should be empty.");
     }
 
     [Fact]
@@ -46,7 +46,8 @@ public class ProductValidatorTests
         action
             .Should()
             .Throw<EntityActionException>()
-            .WithMessage($"This instance cannot be added. Reasons: Even tough this is a new instance of product version is odd. Should be 1.");
+            .WithMessage(
+                $"This instance cannot be added. Reasons: Even tough this is a new instance of product version is odd. Should be 1.");
     }
 
     [Fact]

@@ -16,7 +16,7 @@ public record Product
         // Properties not allowed to be updated by the user.
         Id = old.Id;
         CreatedAt = old.CreatedAt;
-        
+
         // Dynamic properties. (Can be updated by the user)
         Name = newValues.TryGetValue(nameof(Name), out var name) ? name.ToString() : old.Name;
         Company = newValues.TryGetValue(nameof(Company), out var company) ? company.ToString() : old.Company;
@@ -103,7 +103,7 @@ public record Product
         get => _company;
         init
         {
-            value.IsTextUpToChars(EntityConstants.Products.CompanyMaxChars, 
+            value.IsTextUpToChars(EntityConstants.Products.CompanyMaxChars,
                 $"{nameof(Product)} {nameof(Company)}");
 
             _company = value;
