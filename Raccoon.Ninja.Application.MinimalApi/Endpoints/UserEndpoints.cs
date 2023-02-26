@@ -8,7 +8,7 @@ public static class UserEndpoints
     public static IResult GetUsers(IUserAppService userAppService, [FromQuery]int? limit)
     {
         var users = userAppService.Get(limit ?? 42);
-        return users.Any()
+        return users is not null && users.Any()
             ? Results.Ok(users)
             : Results.NoContent();
     }

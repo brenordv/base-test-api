@@ -11,15 +11,13 @@ public class CacheServiceTests
 {
     private readonly CacheService _cacheService;
     private readonly Mock<IMemoryCache> _mockMemoryCache;
-    private Mock<IEventManager> _mockEventManager;
-    private Mock<ILogger<CacheService>> _mockLogger;
-    
+
     public CacheServiceTests()
     {
+        var eventManagerMock = new Mock<IEventManager>();
+        var loggerMock = new Mock<ILogger<CacheService>>();
         _mockMemoryCache = new Mock<IMemoryCache>();
-        _mockEventManager = new Mock<IEventManager>();
-        _mockLogger = new Mock<ILogger<CacheService>>();
-        _cacheService = new CacheService(_mockMemoryCache.Object, _mockEventManager.Object, _mockLogger.Object);
+        _cacheService = new CacheService(_mockMemoryCache.Object, eventManagerMock.Object, loggerMock.Object);
     }
     
     [Fact]

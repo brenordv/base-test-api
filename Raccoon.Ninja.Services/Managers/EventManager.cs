@@ -51,14 +51,14 @@ public class EventManager: IEventManager
         {
             notifierCount++;
             
-            if (HandleNotificationError(subscriberNotifier)) continue;
+            if (HandleNotification(subscriberNotifier)) continue;
 
             _logger.LogTrace("Failed to notify subscriber number '{SubscriberNumber}' for event: {Event}", 
                 notifierCount, eventType);
         }
     }
 
-    private bool HandleNotificationError(Action callback)
+    private bool HandleNotification(Action callback)
     {
         try
         {
