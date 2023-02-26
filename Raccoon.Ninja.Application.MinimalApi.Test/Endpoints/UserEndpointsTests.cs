@@ -40,7 +40,7 @@ public class UserEndpointsTests
         result.Should().NotBeNull();
         result.ToString().Should().EndWith("NoContentResult");
     }
-    
+
     [Fact]
     public void GetUsers_ReturnsNoContentResult_WhenGetReturnsNull()
     {

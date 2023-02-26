@@ -16,7 +16,7 @@ public static class ServiceRegistrationHelper
         services.AddSingleton<IEventManager, EventManager>();
         return services;
     }
-    
+
     public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddSingleton<ICacheService, CacheService>();
@@ -24,7 +24,7 @@ public static class ServiceRegistrationHelper
         services.AddScoped<IUserService, UserService>();
         return services;
     }
-    
+
     public static IServiceCollection RegisterRepositories(this IServiceCollection services)
     {
         services.AddDecoratedWithMemCache<IProductRepository, ProductRepository>(ServiceLifetime.Singleton);

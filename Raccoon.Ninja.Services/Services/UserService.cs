@@ -7,7 +7,7 @@ using Raccoon.Ninja.Test.Helpers.Helpers;
 
 namespace Raccoon.Ninja.Services.Services;
 
-public class UserService: IUserService
+public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
 
@@ -16,21 +16,21 @@ public class UserService: IUserService
         _userRepository = userRepository;
     }
 
-    
+
     [Time("Fetching first {limit} users")]
     public IList<User> Get(int limit = 42)
     {
-       return _userRepository
-           .Get()
-           .Take(limit)
-           .ToList();
+        return _userRepository
+            .Get()
+            .Take(limit)
+            .ToList();
     }
 
     public void PopulateDevDb(int? quantity, int? toDeactivate)
     {
         var qty = quantity ?? 100;
         var qtyToDeactivate = toDeactivate ?? 10;
-        
+
         var inserted = new List<User>();
         foreach (var user in UserGenerator.Generate(qty, false))
         {
@@ -43,7 +43,7 @@ public class UserService: IUserService
         {
             var userToDeactivate = inserted.RandomPick();
             userToDeactivate = userToDeactivate with { IsActive = false };
-            
+
             _userRepository.Update(userToDeactivate);
         }
     }

@@ -8,19 +8,20 @@ public static class UserModelGenerator
 {
     private static readonly Faker<UserModel> FakerFull = Init(true);
     private static readonly Faker<UserModel> FakerNoId = Init(false);
-    
+
     public static IEnumerable<UserModel> Generate(int qty, bool withId = true)
     {
         for (var i = 0; i < qty; i++)
         {
             yield return Generate(withId);
-        }   
+        }
     }
-    
+
     private static UserModel Generate(bool includeId = true)
     {
         return includeId ? FakerFull.Generate() : FakerNoId.Generate();
     }
+
     private static Faker<UserModel> Init(bool includeId)
     {
         var faker = new Faker<UserModel>()

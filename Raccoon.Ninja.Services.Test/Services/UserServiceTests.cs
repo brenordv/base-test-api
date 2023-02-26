@@ -25,7 +25,7 @@ public class UserServiceTests
         const int quantity = 5;
         var expectedUsers = UserGenerator.Generate(quantity).ToList();
         _userRepositoryMock.Setup(r => r.Get()).Returns(expectedUsers);
-        
+
         // Act
         var result = _userService.Get(2);
 
@@ -43,7 +43,7 @@ public class UserServiceTests
 
         var expectedUser = UserGenerator.Generate(1).First();
         _userRepositoryMock.Setup(r => r.Add(It.IsAny<User>())).Returns(expectedUser);
-        
+
         // Act
         _userService.PopulateDevDb(expectedInserted, expectedDeactivated);
 

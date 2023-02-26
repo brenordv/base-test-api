@@ -35,7 +35,8 @@ public class ObjectExtensionsTests
 
     [Theory]
     [MemberData(nameof(GetTryParseDecimalData))]
-    public void TryParseDecimal_ReturnsParsedValue_WhenValueIsConvertibleToDecimal(string valueAsString, decimal expectedValue)
+    public void TryParseDecimal_ReturnsParsedValue_WhenValueIsConvertibleToDecimal(string valueAsString,
+        decimal expectedValue)
     {
         // Arrange
         object value = valueAsString;
@@ -89,7 +90,7 @@ public class ObjectExtensionsTests
         // Assert
         result.Should().Be(fallbackValue);
     }
-    
+
     [Fact]
     public void TryParseDecimal_ReturnsParsedValue_WhenValueIsDecimal()
     {
@@ -104,7 +105,7 @@ public class ObjectExtensionsTests
         // Assert
         result.Should().Be(value);
     }
-    
+
     public static IEnumerable<object[]> GetTryParseDecimalData()
     {
         yield return new object[] { "15.6", 15.6m };

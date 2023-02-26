@@ -14,14 +14,14 @@ public static class UserGenerator
         for (var i = 0; i < qty; i++)
         {
             yield return Generate(withId);
-        }   
+        }
     }
-    
+
     private static User Generate(bool includeId = true)
     {
         return includeId ? FakerFull.Generate() : FakerNoId.Generate();
     }
-    
+
     private static Faker<User> Init(bool includeId)
     {
         var faker = new Faker<User>()

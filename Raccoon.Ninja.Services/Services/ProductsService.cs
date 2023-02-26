@@ -9,10 +9,11 @@ using Raccoon.Ninja.Test.Helpers.Helpers;
 
 namespace Raccoon.Ninja.Services.Services;
 
-public class ProductsService: IProductsService
+public class ProductsService : IProductsService
 {
     private readonly IEventManager _eventManager;
     private readonly IProductRepository _productRepository;
+
     public ProductsService(IEventManager eventManager, IProductRepository productRepository)
     {
         _eventManager = eventManager;
@@ -41,7 +42,7 @@ public class ProductsService: IProductsService
     public Product Update(Guid productId, IDictionary<string, object> parsed)
     {
         var product = _productRepository.Get(productId);
-        
+
         if (product == null) return null;
 
         var prepareForUpdate = new Product(product, parsed);
@@ -54,7 +55,7 @@ public class ProductsService: IProductsService
     {
         var qty = quantity ?? 100;
         var toArchiveQty = toArchive ?? 10;
-        
+
         var inserted = new List<Product>();
         foreach (var product in ProductGenerator.Generate(qty, false))
         {

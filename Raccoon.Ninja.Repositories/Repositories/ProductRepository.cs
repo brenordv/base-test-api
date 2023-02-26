@@ -28,7 +28,7 @@ public class ProductRepository : IProductRepository
             .ToList();
 
         _logger.LogTrace("Returning '{ProdCount}' from database", products.Count);
-        
+
         return products;
     }
 
@@ -38,7 +38,7 @@ public class ProductRepository : IProductRepository
             .Query()
             .Where(product => product.Id == id)
             .FirstOrDefault();
-        
+
         if (product == null)
             _logger.LogTrace("Product with id '{Id}' not found", id);
         else

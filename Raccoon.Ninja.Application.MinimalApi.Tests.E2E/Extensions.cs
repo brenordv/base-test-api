@@ -22,7 +22,7 @@ internal static class WebAppExtensions
         var response = await client.GetAsync($"/api/products/dev/populate-db?quantity={quantity}&archive={archive}");
         response.EnsureSuccessStatusCode();
     }
-    
+
     public static async Task<ProductModel> AddProduct(this WebApplicationFactory<Program> factory,
         StringContent payload, AddProductModel model)
     {

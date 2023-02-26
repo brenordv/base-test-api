@@ -13,7 +13,7 @@ public static class DateTimeValidator
             throw new ValidationException($"{fieldName} cannot be equal to maximum date.");
 
         if (value.ToUniversalTime() <= DateTime.UtcNow) return;
-        
+
         throw new ValidationException($"{fieldName} cannot be in the future.");
     }
 }

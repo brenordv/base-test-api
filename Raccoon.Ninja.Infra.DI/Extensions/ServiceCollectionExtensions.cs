@@ -25,7 +25,7 @@ public static class ServiceCollectionExtensions
         services.Decorate<TService, StopWatchDecorator<TService>>();
         return services;
     }
-    
+
     private static IServiceCollection Decorate<TInterface, TProxy>(this IServiceCollection services)
         where TInterface : class
         where TProxy : DispatchProxy

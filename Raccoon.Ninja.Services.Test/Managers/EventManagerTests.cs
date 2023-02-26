@@ -28,17 +28,18 @@ public class EventManagerTests
         _sut.Should().NotBeNull();
         _sut.Should().BeOfType<EventManager>();
         _sut.GetType().Should().Implement<IEventManager>();
-        
+
         _loggerMock.Verify(logger => logger.Log(
-            LogLevel.Trace, 
-            It.IsAny<EventId>(), 
-            It.Is<It.IsAnyType>((o, t) => string.Equals("Event '{Event}' is not registered. Nothing to do", o.ToString(), StringComparison.InvariantCultureIgnoreCase)), 
-            null, 
+            LogLevel.Trace,
+            It.IsAny<EventId>(),
+            It.Is<It.IsAnyType>((o, t) => string.Equals("Event '{Event}' is not registered. Nothing to do",
+                o.ToString(), StringComparison.InvariantCultureIgnoreCase)),
+            null,
             It.IsAny<Func<It.IsAnyType, Exception, string>>()
-        ),  Times.Never);
+        ), Times.Never);
     }
-    
-    
+
+
     [Fact]
     public void Notify_NotifiesAllListenersForEvent()
     {
@@ -53,7 +54,7 @@ public class EventManagerTests
         _sut.Subscribe(eventType, listener1);
         _sut.Subscribe(eventType, listener2);
         _sut.Unsubscribe(eventType, listener2);
-        
+
         // Act
         _sut.Notify(eventType);
 
@@ -66,19 +67,22 @@ public class EventManagerTests
         listener2Called.Should().BeFalse();
 
         _loggerMock.Verify(logger => logger.Log(
-            LogLevel.Trace, 
-            It.IsAny<EventId>(), 
-            It.Is<It.IsAnyType>((o, t) => string.Equals("Failed to notify subscriber number '{SubscriberNumber}' for event: {Event}", o.ToString(), StringComparison.InvariantCultureIgnoreCase)), 
-            null, 
+            LogLevel.Trace,
+            It.IsAny<EventId>(),
+            It.Is<It.IsAnyType>((o, t) =>
+                string.Equals("Failed to notify subscriber number '{SubscriberNumber}' for event: {Event}",
+                    o.ToString(), StringComparison.InvariantCultureIgnoreCase)),
+            null,
             It.IsAny<Func<It.IsAnyType, Exception, string>>()
-        ),  Times.Never);
-        
+        ), Times.Never);
+
         _loggerMock.Verify(logger => logger.Log(
-            LogLevel.Trace, 
-            It.IsAny<EventId>(), 
-            It.Is<It.IsAnyType>((o, t) => string.Equals("Event '{Event}' is not registered. Nothing to do", o.ToString(), StringComparison.InvariantCultureIgnoreCase)), 
-            null, 
+            LogLevel.Trace,
+            It.IsAny<EventId>(),
+            It.Is<It.IsAnyType>((o, t) => string.Equals("Event '{Event}' is not registered. Nothing to do",
+                o.ToString(), StringComparison.InvariantCultureIgnoreCase)),
+            null,
             It.IsAny<Func<It.IsAnyType, Exception, string>>()
-        ),  Times.Never);
+        ), Times.Never);
     }
 }

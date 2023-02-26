@@ -173,10 +173,7 @@ public class ProductServiceTests
             .Returns<Product>(p => p);
 
         _productRepositoryMock.Setup(repo => repo.Update(It.IsAny<Product>()))
-            .Callback<Product>(p =>
-            {
-                insertedProducts.Add(p);
-            });
+            .Callback<Product>(p => { insertedProducts.Add(p); });
 
         // Act
         _sut.PopulateDevDb(expectedQuantity, null);
@@ -185,7 +182,7 @@ public class ProductServiceTests
         _productRepositoryMock.Verify(repo => repo.Update(It.IsAny<Product>()), Times.Exactly(expectedToArchive));
         insertedProducts.Count(p => p.IsArchived).Should().Be(expectedToArchive);
     }
-    
+
     [Fact]
     public void PopulateDevDb_WithCustomToArchive_ShouldArchive5Products()
     {
@@ -199,10 +196,7 @@ public class ProductServiceTests
             .Returns<Product>(p => p);
 
         _productRepositoryMock.Setup(repo => repo.Update(It.IsAny<Product>()))
-            .Callback<Product>(p =>
-            {
-                insertedProducts.Add(p);
-            });
+            .Callback<Product>(p => { insertedProducts.Add(p); });
 
         // Act
         _sut.PopulateDevDb(expectedQuantity, expectedToArchive);

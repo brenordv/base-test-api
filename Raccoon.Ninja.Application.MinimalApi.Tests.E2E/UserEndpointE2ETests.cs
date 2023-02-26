@@ -9,7 +9,7 @@ namespace Raccoon.Ninja.Application.MinimalApi.Tests.E2E;
 public class UserEndpointE2ETests
 {
     private const string ApiUsersEndpoint = "/api/users";
-    
+
     [Fact]
     public async Task GetUsers_ReturnsOk()
     {
@@ -25,7 +25,7 @@ public class UserEndpointE2ETests
         response.EnsureSuccessStatusCode();
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
-    
+
     [Fact]
     public async Task GetUsers_WithLimit_ReturnsOk()
     {

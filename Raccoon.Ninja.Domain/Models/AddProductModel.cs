@@ -26,7 +26,7 @@ public class AddProductModel
             Company = model.Company
         };
     }
-    
+
     public static implicit operator AddProductModel(Product product)
     {
         return new AddProductModel

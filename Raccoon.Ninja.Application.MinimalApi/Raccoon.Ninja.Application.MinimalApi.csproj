@@ -7,23 +7,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Raccoon.Ninja.AppServices\Raccoon.Ninja.AppServices.csproj" />
-      <ProjectReference Include="..\Raccoon.Ninja.Infra.DI\Raccoon.Ninja.Infra.DI.csproj" />
+        <ProjectReference Include="..\Raccoon.Ninja.AppServices\Raccoon.Ninja.AppServices.csproj"/>
+        <ProjectReference Include="..\Raccoon.Ninja.Infra.DI\Raccoon.Ninja.Infra.DI.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="appsettings.local.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="..\README.MD">
-        <Link>README.MD</Link>
-      </Content>
+        <Content Update="appsettings.local.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\README.MD">
+            <Link>README.MD</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

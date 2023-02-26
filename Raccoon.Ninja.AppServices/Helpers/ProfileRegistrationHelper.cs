@@ -9,10 +9,7 @@ public static class ProfileRegistrationHelper
     public static IServiceCollection RegisterMappingProfiles(this IServiceCollection services)
     {
         // Auto Mapper Configurations
-        var mapperConfig = new MapperConfiguration(mc =>
-        {
-            mc.AddProfile(new ApiProfile());
-        });
+        var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new ApiProfile()); });
 
         var mapper = mapperConfig.CreateMapper();
         services.AddSingleton(mapper);

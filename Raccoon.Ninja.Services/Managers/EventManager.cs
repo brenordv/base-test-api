@@ -4,7 +4,7 @@ using Raccoon.Ninja.Domain.Interfaces.Managers;
 
 namespace Raccoon.Ninja.Services.Managers;
 
-public class EventManager: IEventManager
+public class EventManager : IEventManager
 {
     private readonly Dictionary<EventType, HashSet<Action>> _listeners;
     private readonly ILogger<EventManager> _logger;
@@ -18,7 +18,7 @@ public class EventManager: IEventManager
     public void Subscribe(EventType eventType, Action listener)
     {
         _logger.LogTrace("Adding subscriber to event: {Event}", eventType);
-        
+
         if (!_listeners.ContainsKey(eventType))
             _listeners.Add(eventType, new HashSet<Action>());
 
@@ -29,12 +29,12 @@ public class EventManager: IEventManager
     {
         if (!_listeners.ContainsKey(eventType))
         {
-            _logger.LogTrace("No subscribers found for event: {Event}", eventType);    
+            _logger.LogTrace("No subscribers found for event: {Event}", eventType);
             return;
         }
-        
+
         _logger.LogTrace("Removing subscriber from event: {Event}", eventType);
-        
+
         _listeners[eventType].Remove(listener);
     }
 
@@ -42,7 +42,7 @@ public class EventManager: IEventManager
     {
         if (!_listeners.ContainsKey(eventType))
         {
-            _logger.LogTrace("Event '{Event}' is not registered. Nothing to do", eventType);    
+            _logger.LogTrace("Event '{Event}' is not registered. Nothing to do", eventType);
             return;
         }
 
@@ -50,10 +50,10 @@ public class EventManager: IEventManager
         foreach (var subscriberNotifier in _listeners[eventType])
         {
             notifierCount++;
-            
+
             if (HandleNotification(subscriberNotifier)) continue;
 
-            _logger.LogTrace("Failed to notify subscriber number '{SubscriberNumber}' for event: {Event}", 
+            _logger.LogTrace("Failed to notify subscriber number '{SubscriberNumber}' for event: {Event}",
                 notifierCount, eventType);
         }
     }

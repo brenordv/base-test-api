@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bogus" Version="34.0.2" />
+        <PackageReference Include="Bogus" Version="34.0.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Raccoon.Ninja.Domain\Raccoon.Ninja.Domain.csproj" />
+        <ProjectReference Include="..\Raccoon.Ninja.Domain\Raccoon.Ninja.Domain.csproj"/>
     </ItemGroup>
 
 </Project>
