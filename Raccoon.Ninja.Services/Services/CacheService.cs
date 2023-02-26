@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿#nullable enable
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Raccoon.Ninja.Domain.Enums;
 using Raccoon.Ninja.Domain.Interfaces.Managers;
