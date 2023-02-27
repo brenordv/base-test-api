@@ -18,12 +18,11 @@ public class UsersController: ControllerBase
     [HttpGet(Name = "Get all users")]
     [ProducesResponseType(typeof(List<UserModel>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public IActionResult Get()
+    public async Task<IActionResult> Get([FromQuery] int? limit = null)
     {
-        var users = _userAppService.Get();
+        var users = _userAppService.Get(limit ?? 42);
         return users.Any()
             ? Ok(users)
             : NoContent();
     }
-
 }

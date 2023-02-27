@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Application.O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Infra.DI.Extensions.Web.Common", "Raccoon.Ninja.Infra.DI.Extensions.Web.Common\Raccoon.Ninja.Infra.DI.Extensions.Web.Common.csproj", "{DE7497E8-D944-489A-B68F-9510F6C703FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Application.OldStyleWebApi.Test", "Raccoon.Ninja.Application.OldStyleWebApi.Test\Raccoon.Ninja.Application.OldStyleWebApi.Test.csproj", "{F5986C42-FF8B-407B-B5E6-1ACA7133F991}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{DE7497E8-D944-489A-B68F-9510F6C703FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE7497E8-D944-489A-B68F-9510F6C703FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE7497E8-D944-489A-B68F-9510F6C703FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{010B58B2-89C3-419E-8FF9-13AF69340B96} = {A482C633-3ACD-4149-922D-C8598B2F24DB}
@@ -116,5 +122,6 @@ Global
 		{4C64A6BC-FEF8-49B8-BDC2-E977BC6DCC4E} = {788C6F44-40E3-4E1D-ACF6-506C0A1635E9}
 		{70CFA7CC-5687-476D-9937-4F2CBA94F5DA} = {A482C633-3ACD-4149-922D-C8598B2F24DB}
 		{DE7497E8-D944-489A-B68F-9510F6C703FE} = {713B1D9F-2FF0-4ABB-AD51-49EA1DAD125F}
+		{F5986C42-FF8B-407B-B5E6-1ACA7133F991} = {788C6F44-40E3-4E1D-ACF6-506C0A1635E9}
 	EndGlobalSection
 EndGlobal
