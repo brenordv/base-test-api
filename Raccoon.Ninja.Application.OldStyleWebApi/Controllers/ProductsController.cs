@@ -26,7 +26,7 @@ public class ProductsController : ControllerBase
             : NoContent();
     }
 
-    [HttpGet("/{id:Guid}", Name = "Get product by Id")]
+    [HttpGet("{id:Guid}", Name = "Get product by Id")]
     [ProducesResponseType(typeof(ProductModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetById([FromRoute]Guid id)

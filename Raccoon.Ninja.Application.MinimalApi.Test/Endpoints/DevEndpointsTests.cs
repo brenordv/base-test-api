@@ -50,4 +50,16 @@ public class DevEndpointsTests
         result.Should().NotBeNull();
         result.ToString().Should().EndWith("OkObjectResult");
     }
+    
+    [Fact]
+    public void TestRoute_Ok()
+    {
+        // Arrange
+        // Act
+        var result = DevEndpoints.TestRoute();
+
+        // Assert
+        result.Should().NotBeNull();
+        result.ToString().Should().EndWith("OkObjectResult");
+    }
 }

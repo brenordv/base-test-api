@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Application.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Application.MinimalApi.Tests.E2E", "Raccoon.Ninja.Application.MinimalApi.Tests.E2E\Raccoon.Ninja.Application.MinimalApi.Tests.E2E.csproj", "{4C64A6BC-FEF8-49B8-BDC2-E977BC6DCC4E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "98. Example Requests", "98. Example Requests", "{70E2900D-B44E-4AF5-971D-AA1A03B83ED8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "97. Example Requests", "97. Example Requests", "{70E2900D-B44E-4AF5-971D-AA1A03B83ED8}"
 	ProjectSection(SolutionItems) = preProject
 		TestRequests\product-endpoints-requests.http = TestRequests\product-endpoints-requests.http
 	EndProjectSection
@@ -44,6 +44,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Infra.DI.Extensions.Web.Common", "Raccoon.Ninja.Infra.DI.Extensions.Web.Common\Raccoon.Ninja.Infra.DI.Extensions.Web.Common.csproj", "{DE7497E8-D944-489A-B68F-9510F6C703FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Application.OldStyleWebApi.Test", "Raccoon.Ninja.Application.OldStyleWebApi.Test\Raccoon.Ninja.Application.OldStyleWebApi.Test.csproj", "{F5986C42-FF8B-407B-B5E6-1ACA7133F991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "96. Documentation", "96. Documentation", "{6A448AF3-B521-4DDF-85B1-BD72C849CABE}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+		benchmark.md = benchmark.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "98. Benchmarks", "98. Benchmarks", "{29E21CEA-0312-4D60-85F3-15D71E4B3016}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raccoon.Ninja.Benchmark.APILoad", "Raccoon.Ninja.Benchmark.APILoad\Raccoon.Ninja.Benchmark.APILoad.csproj", "{9ACE6222-5592-4206-B83B-25F9CE551466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +117,10 @@ Global
 		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5986C42-FF8B-407B-B5E6-1ACA7133F991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ACE6222-5592-4206-B83B-25F9CE551466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ACE6222-5592-4206-B83B-25F9CE551466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ACE6222-5592-4206-B83B-25F9CE551466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ACE6222-5592-4206-B83B-25F9CE551466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{010B58B2-89C3-419E-8FF9-13AF69340B96} = {A482C633-3ACD-4149-922D-C8598B2F24DB}
@@ -123,5 +137,6 @@ Global
 		{70CFA7CC-5687-476D-9937-4F2CBA94F5DA} = {A482C633-3ACD-4149-922D-C8598B2F24DB}
 		{DE7497E8-D944-489A-B68F-9510F6C703FE} = {713B1D9F-2FF0-4ABB-AD51-49EA1DAD125F}
 		{F5986C42-FF8B-407B-B5E6-1ACA7133F991} = {788C6F44-40E3-4E1D-ACF6-506C0A1635E9}
+		{9ACE6222-5592-4206-B83B-25F9CE551466} = {29E21CEA-0312-4D60-85F3-15D71E4B3016}
 	EndGlobalSection
 EndGlobal

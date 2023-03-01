@@ -48,4 +48,15 @@ public class DevControllerTests
         result.Should().BeOfType<OkResult>();
         _productsAppServiceMock.Verify(x => x.PopulateDevDb(quantity, archive), Times.Once);
     }
+    
+    [Fact]
+    public async Task TestRoute_ReturnsOk()
+    {
+        // Arrange
+        // Act
+        var result = await _controller.TestRoute();
+
+        // Assert
+        result.Should().BeOfType<OkObjectResult>();
+    }
 }
