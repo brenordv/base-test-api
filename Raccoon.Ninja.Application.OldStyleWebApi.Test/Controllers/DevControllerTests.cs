@@ -8,9 +8,9 @@ namespace Raccoon.Ninja.Application.OldStyleWebApi.Test.Controllers;
 
 public class DevControllerTests
 {
+    private readonly DevController _controller;
     private readonly Mock<IProductsAppService> _productsAppServiceMock;
     private readonly Mock<IUserAppService> _userAppServiceMock;
-    private readonly DevController _controller;
 
     public DevControllerTests()
     {
@@ -48,7 +48,7 @@ public class DevControllerTests
         result.Should().BeOfType<OkResult>();
         _productsAppServiceMock.Verify(x => x.PopulateDevDb(quantity, archive), Times.Once);
     }
-    
+
     [Fact]
     public void TestRoute_ReturnsOk()
     {

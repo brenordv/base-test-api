@@ -11,10 +11,7 @@ public static class ProductGenerator
 
     public static IEnumerable<Product> Generate(int qty, bool withId = true)
     {
-        for (var i = 0; i < qty; i++)
-        {
-            yield return Generate(withId);
-        }
+        for (var i = 0; i < qty; i++) yield return Generate(withId);
     }
 
     public static Product Generate(bool includeId = true, bool resetVersion = false)

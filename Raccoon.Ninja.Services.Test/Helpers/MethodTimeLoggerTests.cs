@@ -53,9 +53,15 @@ internal class TestLogger : ILogger
         LastMessage = formatter(state, exception);
     }
 
-    public bool IsEnabled(LogLevel logLevel) => true;
+    public bool IsEnabled(LogLevel logLevel)
+    {
+        return true;
+    }
 
-    public IDisposable BeginScope<TState>(TState state) => throw new NotImplementedException();
+    public IDisposable BeginScope<TState>(TState state)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 internal static class ConsoleCapture

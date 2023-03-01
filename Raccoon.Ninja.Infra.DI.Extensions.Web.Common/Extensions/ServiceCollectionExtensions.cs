@@ -15,10 +15,10 @@ public static class ServiceCollectionExtensions
             .AddEndpointsApiExplorer()
             .AddMemoryCache()
             .AddLogging();
-        
+
         // Since all APIs are just for testing, I'll always add the swagger
         services.AddSwaggerGen();
-        
+
         // Registering API adapter (app service layer) specific stuff.
         services
             .RegisterMappingProfiles()
@@ -30,7 +30,7 @@ public static class ServiceCollectionExtensions
             .RegisterRepositories()
             .RegisterServices()
             .RegisterAuxiliary();
-        
+
         return services;
     }
 }

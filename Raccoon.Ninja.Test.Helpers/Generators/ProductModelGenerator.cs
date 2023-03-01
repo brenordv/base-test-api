@@ -10,10 +10,7 @@ public static class ProductModelGenerator
 
     public static IEnumerable<ProductModel> Generate(int qty, bool withId = true)
     {
-        for (var i = 0; i < qty; i++)
-        {
-            yield return Generate(withId);
-        }
+        for (var i = 0; i < qty; i++) yield return Generate(withId);
     }
 
     public static ProductModel Generate(bool includeId = true)
@@ -49,7 +46,7 @@ public static class ProductModelGenerator
 
         return faker;
     }
-    
+
     public static ProductModel FromAddProductModel(AddProductModel addProductModel, bool addId)
     {
         var productModel = new ProductModel

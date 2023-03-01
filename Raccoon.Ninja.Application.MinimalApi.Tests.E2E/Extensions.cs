@@ -5,7 +5,7 @@ using Raccoon.Ninja.Domain.Models;
 namespace Raccoon.Ninja.Application.MinimalApi.Tests.E2E;
 
 /// <summary>
-/// Couple of helper methods to populate the database, add products, etc.
+///     Couple of helper methods to populate the database, add products, etc.
 /// </summary>
 internal static class WebAppExtensions
 {

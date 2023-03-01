@@ -10,10 +10,7 @@ public static class AddProductModelGenerator
 
     public static IEnumerable<AddProductModel> Generate(int qty)
     {
-        for (var i = 0; i < qty; i++)
-        {
-            yield return Generate();
-        }
+        for (var i = 0; i < qty; i++) yield return Generate();
     }
 
     public static AddProductModel Generate()

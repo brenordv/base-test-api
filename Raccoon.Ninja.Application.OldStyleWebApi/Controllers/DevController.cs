@@ -5,7 +5,7 @@ namespace Raccoon.Ninja.Application.OldStyleWebApi.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]
-public class DevController: ControllerBase
+public class DevController : ControllerBase
 {
     private readonly IProductsAppService _productsAppService;
     private readonly IUserAppService _userAppService;
@@ -31,12 +31,11 @@ public class DevController: ControllerBase
         _productsAppService.PopulateDevDb(quantity, archive);
         return Ok();
     }
-    
+
     [HttpGet("info", Name = "Just a test route.")]
     [ProducesResponseType(typeof(DateTime), StatusCodes.Status200OK)]
     public IActionResult TestRoute()
     {
-        
         return Ok(DateTime.Now);
     }
 }

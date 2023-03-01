@@ -6,7 +6,24 @@ namespace Raccoon.Ninja.Domain.Entities;
 
 public record User
 {
+    private readonly DateTime _createdAt;
+
+    private readonly decimal _credits;
+
+    private readonly string _email;
+
+    private readonly string _firstName;
     private readonly Guid _id;
+
+    private readonly string _lastName;
+
+    private readonly string _mobile;
+
+    private readonly UserType _role;
+
+    private readonly DateTime _updatedAt;
+
+    private readonly int _version = 1;
 
     public Guid Id
     {
@@ -17,8 +34,6 @@ public record User
             _id = value;
         }
     }
-
-    private readonly string _firstName;
 
     public string FirstName
     {
@@ -31,8 +46,6 @@ public record User
         }
     }
 
-    private readonly string _lastName;
-
     public string LastName
     {
         get => _lastName;
@@ -43,8 +56,6 @@ public record User
             _lastName = value;
         }
     }
-
-    private readonly string _email;
 
     public string Email
     {
@@ -57,8 +68,6 @@ public record User
         }
     }
 
-    private readonly string _mobile;
-
     public string Mobile
     {
         get => _mobile;
@@ -70,8 +79,6 @@ public record User
         }
     }
 
-    private readonly decimal _credits;
-
     public decimal Credits
     {
         get => _credits;
@@ -81,8 +88,6 @@ public record User
             _credits = value;
         }
     }
-
-    private readonly UserType _role;
 
     public UserType Role
     {
@@ -94,8 +99,6 @@ public record User
         }
     }
 
-    private readonly DateTime _createdAt;
-
     public DateTime CreatedAt
     {
         get => _createdAt;
@@ -106,8 +109,6 @@ public record User
         }
     }
 
-    private readonly DateTime _updatedAt;
-
     public DateTime UpdatedAt
     {
         get => _updatedAt;
@@ -117,8 +118,6 @@ public record User
             _updatedAt = value;
         }
     }
-
-    private readonly int _version = 1;
 
     public int Version
     {
