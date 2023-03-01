@@ -12,14 +12,14 @@ internal static class WebAppExtensions
     public static async Task PopulateUsers(this WebApplicationFactory<Program> factory, int quantity, int archive)
     {
         var client = factory.CreateClient();
-        var response = await client.GetAsync($"/api/users/dev/populate-db?quantity={quantity}&archive={archive}");
+        var response = await client.GetAsync($"/api/dev/populate-users-db?quantity={quantity}&archive={archive}");
         response.EnsureSuccessStatusCode();
     }
 
     public static async Task PopulateProducts(this WebApplicationFactory<Program> factory, int quantity, int archive)
     {
         var client = factory.CreateClient();
-        var response = await client.GetAsync($"/api/products/dev/populate-db?quantity={quantity}&archive={archive}");
+        var response = await client.GetAsync($"/api/dev/populate-products-db?quantity={quantity}&archive={archive}");
         response.EnsureSuccessStatusCode();
     }
 

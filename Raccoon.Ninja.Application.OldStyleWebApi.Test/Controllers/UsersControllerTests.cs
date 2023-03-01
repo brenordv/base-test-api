@@ -20,14 +20,14 @@ public class UsersControllerTests
     }
 
     [Fact]
-    public async Task Get_ReturnsOk_WithUsers()
+    public void Get_ReturnsOk_WithUsers()
     {
         // Arrange
         var users = UserModelGenerator.Generate(2).ToList();
         _userAppServiceMock.Setup(x => x.Get(users.Count)).Returns(users);
 
         // Act
-        var result = await _controller.Get(users.Count);
+        var result = _controller.Get(users.Count);
 
         // Assert
         result.Should().BeOfType<OkObjectResult>();
@@ -37,14 +37,14 @@ public class UsersControllerTests
     [Theory]
     [InlineData(10)]
     [InlineData(null)]
-    public async Task Get_ReturnsNoContent_WithNoUsers(int? limit)
+    public void Get_ReturnsNoContent_WithNoUsers(int? limit)
     {
         // Arrange
         var users = new List<UserModel>();
         _userAppServiceMock.Setup(x => x.Get(It.IsAny<int>())).Returns(users);
 
         // Act
-        var result = await _controller.Get(limit);
+        var result = _controller.Get(limit);
 
         // Assert
         result.Should().BeOfType<NoContentResult>();

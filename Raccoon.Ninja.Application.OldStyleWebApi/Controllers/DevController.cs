@@ -18,7 +18,7 @@ public class DevController: ControllerBase
 
     [HttpGet("populate-users-db", Name = "Populate Users database")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> PopulateUsersDb([FromQuery] int? quantity, [FromQuery] int? archive)
+    public IActionResult PopulateUsersDb([FromQuery] int? quantity, [FromQuery] int? archive)
     {
         _userAppService.PopulateDevDb(quantity, archive);
         return Ok();
@@ -26,7 +26,7 @@ public class DevController: ControllerBase
 
     [HttpGet("populate-products-db", Name = "Populate Products database")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> PopulateProductsDb([FromQuery] int? quantity, [FromQuery] int? archive)
+    public IActionResult PopulateProductsDb([FromQuery] int? quantity, [FromQuery] int? archive)
     {
         _productsAppService.PopulateDevDb(quantity, archive);
         return Ok();
@@ -34,7 +34,7 @@ public class DevController: ControllerBase
     
     [HttpGet("info", Name = "Just a test route.")]
     [ProducesResponseType(typeof(DateTime), StatusCodes.Status200OK)]
-    public async Task<IActionResult> TestRoute()
+    public IActionResult TestRoute()
     {
         
         return Ok(DateTime.Now);

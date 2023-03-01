@@ -20,14 +20,14 @@ public class DevControllerTests
     }
 
     [Fact]
-    public async Task PopulateUsersDb_ReturnsOk()
+    public void PopulateUsersDb_ReturnsOk()
     {
         // Arrange
         int? quantity = 10;
         int? archive = 1;
 
         // Act
-        var result = await _controller.PopulateUsersDb(quantity, archive);
+        var result = _controller.PopulateUsersDb(quantity, archive);
 
         // Assert
         result.Should().BeOfType<OkResult>();
@@ -35,14 +35,14 @@ public class DevControllerTests
     }
 
     [Fact]
-    public async Task PopulateProductsDb_ReturnsOk()
+    public void PopulateProductsDb_ReturnsOk()
     {
         // Arrange
         int? quantity = 20;
         int? archive = 0;
 
         // Act
-        var result = await _controller.PopulateProductsDb(quantity, archive);
+        var result = _controller.PopulateProductsDb(quantity, archive);
 
         // Assert
         result.Should().BeOfType<OkResult>();
@@ -50,11 +50,11 @@ public class DevControllerTests
     }
     
     [Fact]
-    public async Task TestRoute_ReturnsOk()
+    public void TestRoute_ReturnsOk()
     {
         // Arrange
         // Act
-        var result = await _controller.TestRoute();
+        var result = _controller.TestRoute();
 
         // Assert
         result.Should().BeOfType<OkObjectResult>();
