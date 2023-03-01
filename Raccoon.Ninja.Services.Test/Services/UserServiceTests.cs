@@ -9,8 +9,8 @@ namespace Raccoon.Ninja.Services.Test.Services;
 
 public class UserServiceTests
 {
-    private readonly UserService _userService;
     private readonly Mock<IUserRepository> _userRepositoryMock;
+    private readonly UserService _userService;
 
     public UserServiceTests()
     {

@@ -10,8 +10,8 @@ namespace Raccoon.Ninja.Repositories.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly ILogger<UserRepository> _logger;
     private readonly ILiteCollection<User> _collection;
+    private readonly ILogger<UserRepository> _logger;
 
     public UserRepository(ILogger<UserRepository> logger, IOptions<AppSettings> appSettings)
     {

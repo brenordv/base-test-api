@@ -4,9 +4,9 @@ using NBomber.Http.CSharp;
 using var httpClientMinApi = new HttpClient();
 using var httpClientWebApi = new HttpClient();
 
-var testLoad = Simulation.Inject(rate: 24,
-    interval: TimeSpan.FromMilliseconds(50),
-    during: TimeSpan.FromSeconds(60));
+var testLoad = Simulation.Inject(24,
+    TimeSpan.FromMilliseconds(50),
+    TimeSpan.FromSeconds(60));
 
 var scenarioMinApi = Scenario.Create("Minimal API", async context =>
     {
@@ -33,5 +33,5 @@ var scenarioWebApi = Scenario.Create("Web API", async context =>
     .WithLoadSimulations(testLoad);
 
 NBomberRunner
-    .RegisterScenarios(new [] {scenarioMinApi, scenarioWebApi})
+    .RegisterScenarios(scenarioMinApi, scenarioWebApi)
     .Run();

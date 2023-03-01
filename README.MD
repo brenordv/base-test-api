@@ -158,7 +158,10 @@ Since this is a test API, I've kept the populate-db (`/dev/populate-db`) endpoin
 # Updates
 
 ## 2023-02-28 - Benchmark
-I've added the same api, but using WebApi instead of MinimalApi. I've also added a benchmark project to compare the two approaches.
+
+I've added the same api, but using WebApi instead of MinimalApi. I've also added a benchmark project to compare the two
+approaches.
+
 - [Benchmark Results](./benchmark.md)
 
 ## 2023-02-25 - Huge update

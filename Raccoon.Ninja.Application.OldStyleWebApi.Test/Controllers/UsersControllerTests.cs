@@ -10,8 +10,8 @@ namespace Raccoon.Ninja.Application.OldStyleWebApi.Test.Controllers;
 
 public class UsersControllerTests
 {
-    private readonly Mock<IUserAppService> _userAppServiceMock;
     private readonly UsersController _controller;
+    private readonly Mock<IUserAppService> _userAppServiceMock;
 
     public UsersControllerTests()
     {

@@ -11,10 +11,7 @@ public static class UserModelGenerator
 
     public static IEnumerable<UserModel> Generate(int qty, bool withId = true)
     {
-        for (var i = 0; i < qty; i++)
-        {
-            yield return Generate(withId);
-        }
+        for (var i = 0; i < qty; i++) yield return Generate(withId);
     }
 
     private static UserModel Generate(bool includeId = true)

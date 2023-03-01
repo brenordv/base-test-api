@@ -33,7 +33,7 @@ public class ProductValidatorTests
             .Should()
             .Throw<EntityActionException>()
             .WithMessage(
-                $"This instance cannot be added. Reasons: This instance of product already has an Id. Should be empty.");
+                "This instance cannot be added. Reasons: This instance of product already has an Id. Should be empty.");
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class ProductValidatorTests
             .Should()
             .Throw<EntityActionException>()
             .WithMessage(
-                $"This instance cannot be added. Reasons: Even tough this is a new instance of product version is odd. Should be 1.");
+                "This instance cannot be added. Reasons: Even tough this is a new instance of product version is odd. Should be 1.");
     }
 
     [Fact]

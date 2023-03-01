@@ -6,7 +6,7 @@ namespace Raccoon.Ninja.Application.OldStyleWebApi.Controllers;
 
 [ApiController]
 [Route("/api/[controller]")]
-public class UsersController: ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserAppService _userAppService;
 

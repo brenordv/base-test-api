@@ -22,7 +22,7 @@ public static class DevEndpoints
 
         return Results.Ok();
     }
-    
+
     public static IResult TestRoute()
     {
         return Results.Ok(DateTime.Now);

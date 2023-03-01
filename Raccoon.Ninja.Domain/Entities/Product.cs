@@ -7,6 +7,24 @@ namespace Raccoon.Ninja.Domain.Entities;
 
 public record Product
 {
+    private readonly string _company;
+
+    private readonly DateTime _createdAt;
+
+    private readonly string _description;
+
+    private readonly Guid _id;
+
+    private readonly DateTime _modifiedAt;
+
+    private readonly string _name;
+
+    private readonly decimal _suggestedPrice;
+
+    private readonly ProductTier _tier;
+
+    private readonly int _version = 1;
+
     public Product()
     {
     }
@@ -33,8 +51,6 @@ public record Product
             : old.ArchivedAt;
     }
 
-    private readonly Guid _id;
-
     public Guid Id
     {
         get => _id;
@@ -44,8 +60,6 @@ public record Product
             _id = value;
         }
     }
-
-    private readonly string _name;
 
     public string Name
     {
@@ -57,8 +71,6 @@ public record Product
             _name = value;
         }
     }
-
-    private readonly string _description;
 
     public string Description
     {
@@ -72,8 +84,6 @@ public record Product
         }
     }
 
-    private readonly decimal _suggestedPrice;
-
     public decimal SuggestedPrice
     {
         get => _suggestedPrice;
@@ -84,8 +94,6 @@ public record Product
         }
     }
 
-    private readonly ProductTier _tier;
-
     public ProductTier Tier
     {
         get => _tier;
@@ -95,8 +103,6 @@ public record Product
             _tier = value;
         }
     }
-
-    private readonly string _company;
 
     public string Company
     {
@@ -110,8 +116,6 @@ public record Product
         }
     }
 
-    private readonly DateTime _createdAt;
-
     public DateTime CreatedAt
     {
         get => _createdAt;
@@ -122,8 +126,6 @@ public record Product
         }
     }
 
-    private readonly DateTime _modifiedAt;
-
     public DateTime ModifiedAt
     {
         get => _modifiedAt;
@@ -133,8 +135,6 @@ public record Product
             _modifiedAt = value;
         }
     }
-
-    private readonly int _version = 1;
 
     public int Version
     {

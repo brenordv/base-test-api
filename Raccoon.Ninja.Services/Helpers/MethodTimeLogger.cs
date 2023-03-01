@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 namespace Raccoon.Ninja.Services.Helpers;
 
 /// <summary>
-/// This class must be named like this to be recognized by the MethodTimer NuGet package.
+///     This class must be named like this to be recognized by the MethodTimer NuGet package.
 /// </summary>
 public static class MethodTimeLogger
 {

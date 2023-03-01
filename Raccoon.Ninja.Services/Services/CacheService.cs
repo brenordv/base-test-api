@@ -9,9 +9,9 @@ namespace Raccoon.Ninja.Services.Services;
 
 public class CacheService : ICacheService
 {
-    private readonly IMemoryCache _memoryCache;
-    private readonly ILogger<CacheService> _logger;
     private readonly IList<object> _keys;
+    private readonly ILogger<CacheService> _logger;
+    private readonly IMemoryCache _memoryCache;
 
     public CacheService(IMemoryCache memoryCache, IEventManager eventManager, ILogger<CacheService> logger)
     {
@@ -35,9 +35,6 @@ public class CacheService : ICacheService
     private void ResetCache()
     {
         _logger.LogTrace("Busting current cache");
-        foreach (var key in _keys)
-        {
-            _memoryCache.Remove(key);
-        }
+        foreach (var key in _keys) _memoryCache.Remove(key);
     }
 }

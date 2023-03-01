@@ -3,11 +3,11 @@
 namespace Raccoon.Ninja.Repositories.DbHelpers;
 
 /// <summary>
-/// Either returns the database file that will be used or
-/// the memory stream.
-/// <remarks>
-/// This will be improved in the future. 
-/// </remarks>
+///     Either returns the database file that will be used or
+///     the memory stream.
+///     <remarks>
+///         This will be improved in the future.
+///     </remarks>
 /// </summary>
 [ExcludeFromCodeCoverage]
 public static class DbFileHelper

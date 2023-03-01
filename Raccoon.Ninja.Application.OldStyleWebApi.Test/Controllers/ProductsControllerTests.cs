@@ -89,7 +89,7 @@ public class ProductsControllerTests
         var notFoundResult = (NotFoundResult)result;
         notFoundResult.StatusCode.Should().Be(StatusCodes.Status404NotFound);
     }
-    
+
     [Fact]
     public void AddNewProduct_ReturnsCreatedAtActionWithProduct_WhenProductIsCreated()
     {

@@ -6,8 +6,8 @@ namespace Raccoon.Ninja.Infra.DI.Decorators;
 
 public class CachingDecorator<TDecorated> : DispatchProxy
 {
-    private TDecorated _decorated;
     private ICacheService _cacheService;
+    private TDecorated _decorated;
     private ILogger<TDecorated> _logger;
 
     protected override object Invoke(MethodInfo targetMethod, object[] args)

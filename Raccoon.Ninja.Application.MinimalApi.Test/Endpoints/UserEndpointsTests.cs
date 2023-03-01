@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Raccoon.Ninja.Application.MinimalApi.Endpoints;
 using Raccoon.Ninja.AppServices.Interfaces;

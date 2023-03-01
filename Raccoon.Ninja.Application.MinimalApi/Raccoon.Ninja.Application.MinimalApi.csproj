@@ -7,15 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Raccoon.Ninja.AppServices\Raccoon.Ninja.AppServices.csproj" />
-        <ProjectReference Include="..\Raccoon.Ninja.Infra.DI.Extensions.Web.Common\Raccoon.Ninja.Infra.DI.Extensions.Web.Common.csproj" />
-        <ProjectReference Include="..\Raccoon.Ninja.Infra.DI\Raccoon.Ninja.Infra.DI.csproj" />
+        <ProjectReference Include="..\Raccoon.Ninja.AppServices\Raccoon.Ninja.AppServices.csproj"/>
+        <ProjectReference Include="..\Raccoon.Ninja.Infra.DI.Extensions.Web.Common\Raccoon.Ninja.Infra.DI.Extensions.Web.Common.csproj"/>
+        <ProjectReference Include="..\Raccoon.Ninja.Infra.DI\Raccoon.Ninja.Infra.DI.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>

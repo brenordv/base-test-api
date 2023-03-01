@@ -34,9 +34,9 @@ public static class GlobalEndpointMapper
             .Produces(StatusCodes.Status204NoContent);
 
         app.MapGet("/api/dev/populate-users-db", DevEndpoints.PopulateUsers);
-        
+
         app.MapGet("/api/dev/info", DevEndpoints.TestRoute);
-        
+
         return app;
     }
 }

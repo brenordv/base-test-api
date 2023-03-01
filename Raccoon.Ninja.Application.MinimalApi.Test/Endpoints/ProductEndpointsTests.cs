@@ -8,14 +8,13 @@ using Raccoon.Ninja.Test.Helpers.Generators;
 namespace Raccoon.Ninja.Application.MinimalApi.Test.Endpoints;
 
 /// <summary>
-/// Tests for the Product endpoints.
+///     Tests for the Product endpoints.
 /// </summary>
 /// <remarks>
-/// Pardon the horrible tests. IResults are not really testable in .net6.0.
-/// It's planned to be improved (fixed, really) in .net7.0. Whenever I change the .net version, I'll update the tests.
-/// Reference: https://github.com/dotnet/aspnetcore/pull/40704
-/// 
-/// (I'm really not happy of the way I'm testing the endpoints.) 
+///     Pardon the horrible tests. IResults are not really testable in .net6.0.
+///     It's planned to be improved (fixed, really) in .net7.0. Whenever I change the .net version, I'll update the tests.
+///     Reference: https://github.com/dotnet/aspnetcore/pull/40704
+///     (I'm really not happy of the way I'm testing the endpoints.)
 /// </remarks>
 public class ProductEndpointsTests
 {

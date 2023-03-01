@@ -7,12 +7,12 @@
         <Nullable>disable</Nullable>
         <ServerGarbageCollection>true</ServerGarbageCollection>
         <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
-    </PropertyGroup>    
-    
+    </PropertyGroup>
+
     <ItemGroup>
-      <PackageReference Include="NBomber" Version="4.0.1" />
-      <PackageReference Include="NBomber.Http" Version="4.0.0" />
-      <PackageReference Include="System.Net.Http" Version="4.3.4" />
+        <PackageReference Include="NBomber" Version="4.0.1"/>
+        <PackageReference Include="NBomber.Http" Version="4.0.0"/>
+        <PackageReference Include="System.Net.Http" Version="4.3.4"/>
     </ItemGroup>
 
 </Project>

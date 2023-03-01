@@ -6,14 +6,13 @@ using Raccoon.Ninja.AppServices.Interfaces;
 namespace Raccoon.Ninja.Application.MinimalApi.Test.Endpoints;
 
 /// <summary>
-/// Tests for the Dev endpoints.
+///     Tests for the Dev endpoints.
 /// </summary>
 /// <remarks>
-/// Pardon the horrible tests. IResults are not really testable in .net6.0.
-/// It's planned to be improved (fixed, really) in .net7.0. Whenever I change the .net version, I'll update the tests.
-/// Reference: https://github.com/dotnet/aspnetcore/pull/40704
-/// 
-/// (I'm really not happy of the way I'm testing the endpoints.) 
+///     Pardon the horrible tests. IResults are not really testable in .net6.0.
+///     It's planned to be improved (fixed, really) in .net7.0. Whenever I change the .net version, I'll update the tests.
+///     Reference: https://github.com/dotnet/aspnetcore/pull/40704
+///     (I'm really not happy of the way I'm testing the endpoints.)
 /// </remarks>
 public class DevEndpointsTests
 {
@@ -50,7 +49,7 @@ public class DevEndpointsTests
         result.Should().NotBeNull();
         result.ToString().Should().EndWith("OkObjectResult");
     }
-    
+
     [Fact]
     public void TestRoute_Ok()
     {

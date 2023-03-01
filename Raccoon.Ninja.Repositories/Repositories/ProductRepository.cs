@@ -10,8 +10,8 @@ namespace Raccoon.Ninja.Repositories.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private readonly ILogger<ProductRepository> _logger;
     private readonly ILiteCollection<Product> _collection;
+    private readonly ILogger<ProductRepository> _logger;
 
     public ProductRepository(ILogger<ProductRepository> logger, IOptions<AppSettings> appSettings)
     {

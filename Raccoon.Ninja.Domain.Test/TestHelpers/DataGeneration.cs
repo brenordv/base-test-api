@@ -16,10 +16,7 @@ public class DataGeneration
     public static IEnumerable<object[]> GetValidStringUpToChars(int chars)
     {
         var faker = new Faker();
-        for (var i = 1; i <= chars; i++)
-        {
-            yield return new object[] { faker.Random.String(i, i) };
-        }
+        for (var i = 1; i <= chars; i++) yield return new object[] { faker.Random.String(i, i) };
     }
 
     public static IEnumerable<object[]> GetValidStringOverChars(int chars)
